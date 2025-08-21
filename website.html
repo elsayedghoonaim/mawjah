@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaScope - AI for Global Fisheries</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind CSS Config -->
+    <script>
+      // This configuration script MUST come AFTER the main Tailwind script is loaded.
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              // Sets 'Inter' as the default font family for the site.
+              sans: ['Inter', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
+
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Dark mode root variables */
+        html.dark { color-scheme: dark; }
+
+        /* Page transition animation */
+        @keyframes fade-in { 
+            0% { opacity: 0; transform: translateY(10px); } 
+            100% { opacity: 1; transform: translateY(0); } 
+        }
+        .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+
+        /* Dotted pattern for hero sections */
+        .hero-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 0.5px, transparent 0.5px);
+            background-size: 15px 15px;
+        }
+        .dark .hero-pattern {
+            background-color: #020617;
+            background-image: radial-gradient(#1e293b 0.5px, transparent 0.5px);
+        }
+
+        /* Leaflet map dark theme adjustments */
+        .leaflet-control-layers-toggle {
+            width: 36px !important;
+            height: 36px !important;
+        }
+        .dark .leaflet-control-layers, .dark .leaflet-control-zoom {
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+        }
+        .dark .leaflet-control-layers-base label, .dark .leaflet-control-layers-overlays label {
+            color: #e2e8f0;
+        }
+        .dark .leaflet-tile-pane {
+            filter: brightness(0.8) contrast(1.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 font-sans">
+
+    <div id="app-container" class="min-h-screen flex flex-col">
+        <!-- Header: Populated by JavaScript -->
+        <header id="header-container" class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700/50 sticky top-0 z-50">
+        </header>
+
+        <!-- Main Content: Pages will be injected here -->
+        <main id="main-content" class="flex-grow">
+        </main>
+
+        <!-- Footer: Populated by JavaScript -->
+        <footer id="footer-container" class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+        </footer>
+    </div>
+
+    <!-- TEMPLATES FOR EACH PAGE -->
+
+    <!-- Home Page Template -->
+    <template id="page-home">
+        <div class="animate-fade-in">
+            <!-- Hero Section -->
+            <div class="relative">
+                <!-- Background Image -->
+                <img src="./media/Google_AI_Studio_2025-08-21T11_10_33.935Z.png" alt="Fisherman holding a large fish" class="absolute inset-0 w-full h-full object-cover">
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-slate-800/60"></div>
+                
+                <!-- Centered Content -->
+                <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-48 text-center">
+                    <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+                        Revolutionizing Egypt's Fisheries with AI
+                    </h1>
+                    <p class="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-slate-200">
+                        AquaScope delivers data-driven insights for sustainable fisheries management, enhanced profitability, and secure marine resources.
+                    </p>
+                    <div class="mt-8">
+                        <button data-page="services" class="nav-button inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 md:py-4 md:text-lg md:px-10 transition-transform transform hover:scale-105">
+                            Explore Solutions
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Value Proposition Section -->
+            <div class="bg-white dark:bg-slate-900/50 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                            A New Wave of Marine Intelligence
+                        </h2>
+                        <p class="mt-4 text-xl text-slate-600 dark:text-slate-300">
+                            We provide tangible benefits to all stakeholders in the marine ecosystem.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div class="text-center">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 mx-auto mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><line x1="12" x2="12" y1="20" y2="10" /><line x1="18" x2="18" y1="20" y2="4" /><line x1="6" x2="6" y1="20" y2="16" /></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Enhance National Yields</h3>
+                            <p class="text-slate-600 dark:text-slate-300">
+                                Providing government bodies with the data needed for long-term growth and food security.
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 mx-auto mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><path d="M6.5 12c.9-2.4 3.1-4 5.5-4s4.6 1.6 5.5 4" /><path d="M18 12h.5a2.5 2.5 0 0 1 0 5h-.5" /><path d="M6 12H5.5a2.5 2.5 0 0 0 0 5H6" /><path d="M16.5 17c-.9 2.4-3.1 4-5.5 4s-4.6-1.6-5.5-4" /><path d="M18 5a1.5 1.5 0 0 1 0 3" /><path d="M6 5a1.5 1.5 0 0 0 0 3" /></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Boost Commercial Fishing</h3>
+                            <p class="text-slate-600 dark:text-slate-300">
+                                Identifying promising fishing zones with satellite forecasts to increase profitability and reduce fuel costs.
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 mx-auto mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><path d="M7 4a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V4Z" /><path d="m10 8 3.9-3.9" /><path d="M12 12h.01" /><path d="M5.1 13.8 4 15" /><path d="m19 9-1.1 1.1" /><path d="M21 12v2a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2Z" /><path d="M3 12v-2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2Z" /></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Secure Marine Territories</h3>
+                            <p class="text-slate-600 dark:text-slate-300">
+                                Offering cost-effective maritime surveillance to combat illegal fishing and assert sovereignty.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visual Showcase Section -->
+            <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                            Visualizing a Sustainable Future
+                        </h2>
+                        <p class="mt-4 text-xl text-slate-600 dark:text-slate-300">
+                            Explore how our technology translates complex data into clear, actionable insights.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div>
+                            <img class="object-cover shadow-lg rounded-lg aspect-square" src="./media/Google_AI_Studio_2025-08-21T09_53_03.707Z.png" alt="Map with data overlay" onerror="this.onerror=null;this.src='https://placehold.co/600x600/cccccc/ffffff?text=Image+Not+Found';">
+                            <div class="mt-4 text-center">
+                                <h2 class="text-2xl font-semibold text-slate-800 dark:text-white mb-2">Satellite Data Overlay</h2>
+                                <p class="text-slate-600 dark:text-slate-300 mt-1">Fusing satellite imagery with data layers to reveal invisible patterns.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img class="object-cover shadow-lg rounded-lg aspect-square" src="./media/Google_AI_Studio_2025-08-21T09_54_02.865Z.png" alt="Fishing vessel at sea" onerror="this.onerror=null;this.src='https://placehold.co/600x600/cccccc/ffffff?text=Image+Not+Found';">
+                             <div class="mt-4 text-center">
+                                <h2 class="text-2xl font-semibold text-slate-800 dark:text-white mb-2">On-Vessel Intelligence</h2>
+                                <p class="text-slate-600 dark:text-slate-300 mt-1">Delivering critical insights directly to the bridge for efficient voyages.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img class="object-cover shadow-lg rounded-lg aspect-square" src="./media/Google_AI_Studio_2025-08-21T09_54_37.946Z.png" alt="Underwater marine life" onerror="this.onerror=null;this.src='https://placehold.co/600x600/cccccc/ffffff?text=Image+Not+Found';">
+                             <div class="mt-4 text-center">
+                                <h2 class="text-2xl font-semibold text-slate-800 dark:text-white mb-2">Ecosystem Monitoring</h2>
+                                <p class="text-slate-600 dark:text-slate-300 mt-1">Tracking marine health to ensure sustainability and protect biodiversity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="bg-white dark:bg-slate-900/50 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-base font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Process</h2>
+                        <p class="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                            How It Works
+                        </p>
+                        <p class="mt-4 text-xl text-slate-600 dark:text-slate-300">
+                            From raw satellite data to actionable intelligence in three simple steps.
+                        </p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute left-1/2 -translate-x-1/2 top-8 w-px h-2/3 bg-slate-300 dark:bg-slate-700 hidden md:block" aria-hidden="true"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                            <div class="text-center">
+                                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 shadow-md mx-auto mb-6 relative">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M3 5V19A9 3 0 0 0 12 22A9 3 0 0 0 21 19V5" /><path d="M3 12A9 3 0 0 0 12 15A9 3 0 0 0 21 12" /><path d="M16 12l-4 6h6l-4 6" /></svg>
+                                    <span class="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-white font-bold">1</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Data Acquisition</h3>
+                                <p class="text-slate-600 dark:text-slate-300">We aggregate vast amounts of satellite imagery, weather data, and ground-truth information from our partners.</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 shadow-md mx-auto mb-6 relative">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><path d="M12 5a3 3 0 1 0-5.99-1.01" /><path d="M12 5a3 3 0 1 1 5.99-1.01" /><path d="M15 13a3 3 0 1 0-6 0" /><path d="M12 13h.01" /><path d="M12 16a3 3 0 1 1-6 0" /><path d="M12 16h.01" /><path d="M18 13a3 3 0 1 1-6 0" /><path d="M18 13h.01" /><path d="M6 13a3 3 0 1 0 6 0" /><path d="M6 13H5.99" /><path d="M12 20a3 3 0 1 0-1.5-5.66" /><path d="M12 20a3 3 0 1 1 1.5-5.66" /><path d="M12 5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path d="M12 5V2" /><path d="M15 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" /><path d="M15 13v-1.5" /><path d="M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path d="M12 16v-1.5" /><path d="M9 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path d="M9 13v-1.5" /><path d="M12 20a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" /><path d="M12 20v-1.5" /></svg>
+                                    <span class="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-white font-bold">2</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">AI Analysis</h3>
+                                <p class="text-slate-600 dark:text-slate-300">Our proprietary Machine Learning models process and analyze the data to identify patterns and generate predictive forecasts.</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 shadow-md mx-auto mb-6 relative">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="M12 11h4" /><path d="M12 16h4" /><path d="M8 11h.01" /><path d="M8 16h.01" /></svg>
+                                    <span class="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-white font-bold">3</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Actionable Insights</h3>
+                                <p class="text-slate-600 dark:text-slate-300">The results are delivered through our intuitive platform as clear, actionable reports and alerts for decision-making.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- About Page Template -->
+    <template id="page-about">
+        <div class="animate-fade-in">
+            <div class="bg-gradient-to-br from-cyan-600 to-teal-800 dark:from-slate-900 dark:to-slate-800 text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                        <div class="text-center md:text-left">
+                            <span class="inline-block bg-white/10 text-white text-xs font-semibold px-3 py-1 rounded-full">About Us</span>
+                            <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                                Revolutionizing Fisheries Through Technology
+                            </h1>
+                            <p class="mt-6 text-lg text-cyan-100 dark:text-slate-300">
+                                At AquaScope, we harness the power of technology to transform marine resource management. By combining satellite data and AI, our innovative platform delivers real-time, accurate insights for fisheries worldwide. Say goodbye to outdated, labor-intensive methods—empower your operations with AquaScope's data-driven solutions.
+                            </p>
+                        </div>
+                        <div class="relative w-full aspect-square max-w-md mx-auto">
+                            <img src="./media/Google_AI_Studio_2025-08-21T09_56_17.959Z.png" alt="Fisheries Monitoring" class="w-full h-full object-cover rounded-2xl shadow-2xl" onerror="this.onerror=null;this.src='https://placehold.co/600x600/cccccc/ffffff?text=Image+Error';">
+                            <!-- Hexagon Icons would be placed here with absolute positioning -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative py-16 sm:py-24">
+                <img src="./media/Google_AI_Studio_2025-08-21T09_58_02.764Z.png" alt="Deep Ocean" class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
+                <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                    <h3 class="text-2xl font-bold">Our Mission</h3>
+                    <p class="mt-4 text-xl text-slate-300">
+                        To revolutionize fisheries management and marine resource monitoring worldwide through the application of advanced remote sensing and artificial intelligence.
+                    </p>
+                </div>
+            </div>
+
+            <div class="relative py-16 sm:py-24">
+                 <img src="./media/Google_AI_Studio_2025-08-21T09_58_37.425Z.png" alt="Clear Skies" class="absolute inset-0 w-full h-full object-cover">
+                 <div class="absolute inset-0 bg-cyan-800/60 backdrop-blur-sm"></div>
+                 <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                     <h3 class="text-2xl font-bold">Our Vision</h3>
+                     <p class="mt-4 text-xl text-cyan-100">
+                         To be the cornerstone of a thriving and sustainable Blue Economy, ensuring food security and environmental stewardship for generations to come.
+                     </p>
+                 </div>
+            </div>
+            
+            <div class="relative bg-slate-900 py-16 sm:py-24">
+                <img src="https://placehold.co/1920x800/020617/FFFFFF?text=Abstract+Data+Pattern" alt="Abstract data visualization" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20" onerror="this.onerror=null;this.src='https://placehold.co/1920x800/020617/FFFFFF?text=Image+Error';">
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                         <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
+                             Our Impact by the Numbers
+                         </h2>
+                         <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-300">
+                             Our technology is designed to deliver tangible, measurable results for national economies and marine environments.
+                         </p>
+                    </div>
+                    <div class="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 text-center">
+                        <!-- Impact items will be injected by JS or hardcoded -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                            Our Core Values
+                        </h2>
+                         <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300">
+                             The principles that guide our work and our partnerships.
+                         </p>
+                    </div>
+                    <dl class="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 text-center">
+                        <!-- Values will be injected by JS or hardcoded -->
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Services Page Template -->
+    <template id="page-services">
+        <div class="animate-fade-in">
+            <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                        <h2 class="text-base font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Our Services</h2>
+                        <p class="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                            Data-Driven Solutions for the Marine Sector
+                        </p>
+                        <p class="mt-5 max-w-prose mx-auto text-xl text-slate-600 dark:text-slate-300">
+                            We translate complex satellite data into actionable intelligence for the entire fisheries value chain.
+                        </p>
+                    </div>
+
+                    <div id="services-grid" class="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+                        <!-- Service cards will be injected by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white dark:bg-slate-900/50 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                         <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                             Real Impact, Real Results
+                         </h2>
+                         <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300">
+                             Our services deliver tangible, measurable outcomes that boost efficiency, profitability, and sustainability.
+                         </p>
+                    </div>
+                    <div id="services-impact-grid" class="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 text-center">
+                        <!-- Impact items will be injected by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                            Service Spotlights
+                        </h2>
+                        <p class="mt-4 text-xl text-slate-600 dark:text-slate-300">
+                            A closer look at how our services create value.
+                        </p>
+                    </div>
+                    <div class="space-y-16">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <img src="./media/Google_AI_Studio_2025-08-21T10_03_32.820Z.png" alt="Strategic Planning" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found';">
+                            <div>
+                                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Strategic Fisheries Management</h3>
+                                <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">We empower governments and research institutions with comprehensive data dashboards. This enables effective policy-making, ensures long-term sustainability, and helps secure national food supplies by providing a clear picture of marine resources.</p>
+                            </div>
+                        </div>
+                         <div class="flex flex-col md:flex-row-reverse gap-8 items-center">
+                            <img src="./media/Google_AI_Studio_2025-08-21T10_06_37.898Z.png" alt="Commercial Fishing" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found';">
+                            <div>
+                                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Commercial Fishing Intelligence</h3>
+                                <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">Our platform provides commercial fleets with a decisive advantage. By identifying high-potential fishing zones through satellite data, we help reduce fuel consumption and search times, directly boosting profitability and operational efficiency.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Pricing Page Template -->
+    <template id="page-pricing">
+        <div class="animate-fade-in">
+            <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                        <h2 class="text-base font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Pricing</h2>
+                        <p class="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                            Flexible Engagement Models
+                        </p>
+                        <p class="mt-5 max-w-prose mx-auto text-xl text-slate-600 dark:text-slate-300">
+                            We offer scalable solutions designed to serve all our key customer segments.
+                        </p>
+                    </div>
+
+                    <div id="pricing-plans-grid" class="mt-16 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8">
+                        <!-- Pricing plans will be injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Contact Page Template -->
+    <template id="page-contact">
+        <div class="animate-fade-in">
+            <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                        <h2 class="text-base font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Contact Us</h2>
+                        <p class="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                            Let's Build the Future Together
+                        </p>
+                        <p class="mt-5 max-w-prose mx-auto text-xl text-slate-600 dark:text-slate-300">
+                            Whether you're a government official, a fleet owner, or a potential partner, we'd love to hear from you.
+                        </p>
+                    </div>
+                    <div class="mt-12 max-w-lg mx-auto">
+                        <div class="bg-white dark:bg-slate-800/50 p-8 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700">
+                            <form id="contact-form" class="grid grid-cols-1 gap-y-6">
+                                <div>
+                                    <label for="full-name" class="sr-only">Full name</label>
+                                    <input type="text" name="full-name" id="full-name" required class="block w-full shadow-sm py-3 px-4 bg-white dark:bg-slate-900 placeholder-slate-500 dark:placeholder-slate-400 border-slate-300 dark:border-slate-700 rounded-md focus:ring-cyan-500 focus:border-cyan-500" placeholder="Full name" />
+                                </div>
+                                <div>
+                                    <label for="email" class="sr-only">Email</label>
+                                    <input id="email" name="email" type="email" required class="block w-full shadow-sm py-3 px-4 bg-white dark:bg-slate-900 placeholder-slate-500 dark:placeholder-slate-400 border-slate-300 dark:border-slate-700 rounded-md focus:ring-cyan-500 focus:border-cyan-500" placeholder="Email" />
+                                </div>
+                                <div>
+                                    <label for="message" class="sr-only">Message</label>
+                                    <textarea id="message" name="message" rows="4" required class="block w-full shadow-sm py-3 px-4 bg-white dark:bg-slate-900 placeholder-slate-500 dark:placeholder-slate-400 border-slate-300 dark:border-slate-700 rounded-md focus:ring-cyan-500 focus:border-cyan-500" placeholder="Message"></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+                                        Send Message
+                                    </button>
+                                </div>
+                                <p id="form-status" class="text-center text-green-600 dark:text-green-400 mt-4"></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <!-- Profile Page Template -->
+    <template id="page-profile">
+        <div class="animate-fade-in">
+            <div class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 min-h-screen py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-bold leading-7 text-slate-900 dark:text-white">User Dashboard</h2>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-slate-800/50 rounded-lg shadow-md p-6 mb-8 flex items-center border border-slate-200 dark:border-slate-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 text-cyan-500 dark:text-cyan-400 mr-4"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Welcome, Elsayed!</h3>
+                            <p class="text-slate-600 dark:text-slate-300">Here's an overview of your AquaScope account.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 bg-white dark:bg-slate-800/50 rounded-lg shadow-md p-6 border border-slate-200 dark:border-slate-700">
+                            <h3 class="text-lg font-medium leading-6 text-slate-900 dark:text-white">Subscription Details</h3>
+                            <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                                <div class="px-4 py-5 bg-slate-50 dark:bg-slate-800 rounded-lg overflow-hidden">
+                                    <dt class="text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Current Plan</dt>
+                                    <dd class="mt-1 text-2xl font-semibold text-slate-900 dark:text-white">Pro Tier</dd>
+                                </div>
+                                 <div class="px-4 py-5 bg-slate-50 dark:bg-slate-800 rounded-lg overflow-hidden">
+                                    <dt class="text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Status</dt>
+                                    <dd class="mt-1 text-2xl font-semibold text-green-600 dark:text-green-400">Active</dd>
+                                </div>
+                                 <div class="px-4 py-5 bg-slate-50 dark:bg-slate-800 rounded-lg overflow-hidden">
+                                    <dt class="text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Renewal Date</dt>
+                                    <dd class="mt-1 text-2xl font-semibold text-slate-900 dark:text-white">Aug 1, 2026</dd>
+                                </div>
+                                 <div class="px-4 py-5 bg-slate-50 dark:bg-slate-800 rounded-lg overflow-hidden">
+                                    <dt class="text-sm font-medium text-slate-500 dark:text-slate-400 truncate">API Usage</dt>
+                                    <dd class="mt-1 text-2xl font-semibold text-slate-900 dark:text-white">1,204 / 5,000</dd>
+                                </div>
+                            </dl>
+                             <button class="mt-6 w-full sm:w-auto bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                                Manage Subscription
+                            </button>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-800/50 rounded-lg shadow-md p-6 border border-slate-200 dark:border-slate-700">
+                            <h3 class="text-lg font-medium leading-6 text-slate-900 dark:text-white">Account Settings</h3>
+                            <ul class="mt-5 space-y-4">
+                                <li><a href="#" class="text-cyan-600 hover:text-cyan-800 dark:text-cyan-400 dark:hover:text-cyan-300">Edit Profile Information</a></li>
+                                <li><a href="#" class="text-cyan-600 hover:text-cyan-800 dark:text-cyan-400 dark:hover:text-cyan-300">Change Password</a></li>
+                                <li><a href="#" class="text-cyan-600 hover:text-cyan-800 dark:text-cyan-400 dark:hover:text-cyan-300">Billing History</a></li>
+                                <li><a href="#" class="text-red-600 hover:text-red-800 dark:text-red-500 dark:hover:text-red-400">Delete Account</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Map Page Template -->
+    <template id="page-map">
+        <div class="animate-fade-in">
+             <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                        <h2 class="text-base font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Interactive Map</h2>
+                        <p class="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                            Explore Global Coastlines
+                        </p>
+                        <p class="mt-5 max-w-prose mx-auto text-xl text-slate-600 dark:text-slate-300">
+                            This interactive map demonstrates our geographic monitoring capabilities. Use the layer control in the top right to switch between different base maps and overlays.
+                        </p>
+                    </div>
+
+                    <div class="mt-12 lg:grid lg:grid-cols-3 lg:gap-8 items-start">
+                        <div class="lg:col-span-2 rounded-lg shadow-2xl overflow-hidden">
+                             <div id="map-container" class="h-[600px] w-full"></div>
+                        </div>
+                        <div class="mt-8 lg:mt-0 bg-white dark:bg-slate-800/50 p-8 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Dynamic Data Visualization</h3>
+                            <p class="mt-4 text-slate-600 dark:text-slate-300">
+                                The map serves as the foundation for our platform. Soon, this view will be populated with our proprietary AI-driven data, including:
+                            </p>
+                            <ul class="mt-4 space-y-2 text-slate-600 dark:text-slate-300 list-disc list-inside">
+                                <li>Real-time fish finding forecasts.</li>
+                                <li>Illegal fishing activity alerts.</li>
+                                <li>Historical yield data visualizations.</li>
+                            </ul>
+                            <p class="mt-4 text-slate-600 dark:text-slate-300">
+                                This powerful combination of geographic and analytical data provides our clients with unparalleled insights for decision-making.
+                            </p>
+                            <button data-page="contact" class="nav-button mt-6 w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 transition-transform transform hover:scale-105">
+                                Request a Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Leaflet Map JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+
+    <!-- Main Application JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- STATE MANAGEMENT ---
+            let currentPage = 'home';
+            let currentTheme = localStorage.getItem('theme') || 'light';
+            let isMenuOpen = false;
+            let mapInstance = null;
+
+            // --- DOM ELEMENTS ---
+            const headerContainer = document.getElementById('header-container');
+            const mainContent = document.getElementById('main-content');
+            const footerContainer = document.getElementById('footer-container');
+
+            // --- DATA ---
+            const navItems = [
+                { id: 'home', label: 'Home' }, { id: 'about', label: 'About' },
+                { id: 'services', label: 'Services' }, { id: 'map', label: 'Map'}, { id: 'pricing', label: 'Pricing' },
+                { id: 'contact', label: 'Contact' },
+            ];
+
+            // --- CORE FUNCTIONS ---
+
+            /**
+             * Applies the current theme to the document.
+             */
+            const applyTheme = () => {
+                const html = document.documentElement;
+                if (currentTheme === 'dark') {
+                    html.classList.add('dark');
+                    html.classList.remove('light');
+                } else {
+                    html.classList.add('light');
+                    html.classList.remove('dark');
+                }
+                localStorage.setItem('theme', currentTheme);
+            };
+
+            /**
+             * Toggles the theme between 'light' and 'dark'.
+             */
+            const toggleTheme = () => {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                applyTheme();
+                renderHeader(); // Re-render header to update theme icon
+            };
+            
+            /**
+             * Toggles the mobile navigation menu.
+             */
+            const toggleMenu = () => {
+                isMenuOpen = !isMenuOpen;
+                renderHeader();
+            };
+
+            /**
+             * Main navigation function to switch pages.
+             * @param {string} pageId - The ID of the page to navigate to.
+             * @param {string|null} sectionId - Optional ID of a section to scroll to.
+             */
+            const navigateTo = (pageId, sectionId = null) => {
+                if (pageId === 'blog') {
+                    console.log("Blog page is coming soon!");
+                    return;
+                }
+                
+                currentPage = pageId;
+                isMenuOpen = false; // Close menu on navigation
+
+                const template = document.getElementById(`page-${pageId}`);
+                if (template) {
+                    mainContent.innerHTML = ''; // Clear previous content
+                    const content = template.content.cloneNode(true);
+                    mainContent.appendChild(content);
+
+                    // Dynamically populate content for specific pages
+                    if (pageId === 'about') populateAboutPage();
+                    if (pageId === 'services') populateServicesPage();
+                    if (pageId === 'pricing') populatePricingPage();
+
+                    // Initialize map if on map page
+                    if (pageId === 'map') {
+                        // Delay map initialization to ensure DOM is ready
+                        setTimeout(initMap, 0);
+                    } else if (mapInstance) {
+                        mapInstance.remove();
+                        mapInstance = null;
+                    }
+
+                    // Handle contact form
+                    if (pageId === 'contact') {
+                        const form = document.getElementById('contact-form');
+                        form.addEventListener('submit', handleContactSubmit);
+                    }
+
+                    // Scroll to section or top of page
+                    if (sectionId) {
+                        setTimeout(() => {
+                            const element = document.getElementById(sectionId);
+                            if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        }, 100);
+                    } else {
+                        window.scrollTo(0, 0);
+                    }
+                } else {
+                    console.error(`Page template not found for: ${pageId}`);
+                    navigateTo('home'); // Fallback to home
+                }
+                
+                renderHeader(); // Re-render header to update active link
+                addNavButtonListeners();
+            };
+            
+            /**
+             * Handles the submission of the contact form.
+             * @param {Event} e - The form submission event.
+             */
+            const handleContactSubmit = (e) => {
+                e.preventDefault();
+                const statusEl = document.getElementById('form-status');
+                statusEl.textContent = 'Sending...';
+                setTimeout(() => {
+                    statusEl.textContent = 'Your message has been sent successfully!';
+                    e.target.reset();
+                    setTimeout(() => { statusEl.textContent = ''; }, 3000);
+                }, 1500);
+            };
+
+            /**
+             * Initializes the Leaflet map.
+             */
+            const initMap = () => {
+                const mapContainer = document.getElementById('map-container');
+                if (mapContainer && !mapInstance) {
+                    mapInstance = L.map(mapContainer).setView([27.0, 30.0], 6);
+
+                    const baseLayers = {
+                        "Street Map": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        }),
+                        "True Color": L.esri.tiledMapLayer({
+                            url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
+                        })
+                    };
+
+                    const overlayLayers = {
+                        "Places & Boundaries": L.esri.tiledMapLayer({
+                            url: "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer"
+                        })
+                    };
+
+                    baseLayers["Street Map"].addTo(mapInstance);
+                    overlayLayers["Places & Boundaries"].addTo(mapInstance);
+                    L.control.layers(baseLayers, overlayLayers).addTo(mapInstance);
+                }
+            };
+            
+            // --- DYNAMIC CONTENT POPULATION ---
+            
+            const populateAboutPage = () => {
+                const impacts = [
+                    { value: '+25%', label: 'Increase in Sustainable Fish Yields' },
+                    { value: '90%', label: 'Accuracy in Finding Fishing Zones' },
+                    { value: '-40%', label: 'Reduction in Surveillance & Fuel Costs' },
+                    { value: '-60%', label: 'Decrease in Illegal Fishing Incidents' },
+                ];
+                const values = [
+                    { name: 'Innovation', description: 'We are driven by cutting-edge technology and a relentless pursuit of better solutions.' },
+                    { name: 'Sustainability', description: 'We are committed to the long-term health of marine ecosystems and the communities that depend on them.' },
+                    { name: 'Collaboration', description: 'We build strong partnerships with government, research, and industry to achieve shared goals.' },
+                    { name: 'Integrity', description: 'We operate with transparency, scientific rigor, and a commitment to delivering accurate, reliable data.' },
+                ];
+                const impactContainer = mainContent.querySelector('.mt-16.grid');
+                const valuesContainer = mainContent.querySelector('dl');
+                impactContainer.innerHTML = impacts.map(impact => `
+                    <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
+                        <p class="text-4xl font-extrabold text-white">${impact.value}</p>
+                        <p class="mt-2 text-base font-medium text-slate-300">${impact.label}</p>
+                    </div>`).join('');
+                valuesContainer.innerHTML = values.map(value => `
+                    <div>
+                        <dt class="text-lg leading-6 font-bold text-slate-900 dark:text-white">${value.name}</dt>
+                        <dd class="mt-2 text-base text-slate-600 dark:text-slate-300">${value.description}</dd>
+                    </div>`).join('');
+            };
+
+            const populateServicesPage = () => {
+                const services = [
+                    { id: "strategic-management", title: "Strategic Fisheries Management", description: "Comprehensive data and analytics for government and research bodies to support national food security, sustainable management, and long-term yield growth.", imageUrl: "./media/ChatGPT Image Aug 21, 2025, 02_18_20 PM.png" },
+                    { id: "commercial-intelligence", title: "Commercial Fishing Intelligence", description: "Satellite-based forecasts pinpoint promising fishing zones, drastically reducing search times and fuel costs for commercial fleets to maximize profitability.", imageUrl: "./media/ChatGPT Image Aug 21, 2025, 02_22_10 PM.png" },
+                    { id: "maritime-surveillance", title: "Maritime Surveillance & Compliance", description: "A cost-effective solution for regulatory bodies and exporters to combat illegal fishing and meet international traceability requirements.", imageUrl: "./media/ChatGPT Image Aug 21, 2025, 02_25_37 PM.png" }
+                ];
+                const impacts = [
+                    { value: '+25%', label: 'Increase in Sustainable Fish Yields' },
+                    { value: '90%', label: 'Accuracy in Finding Fishing Zones' },
+                    { value: '-40%', label: 'Reduction in Surveillance & Fuel Costs' },
+                    { value: '-60%', label: 'Decrease in Illegal Fishing Incidents' },
+                ];
+                const servicesGrid = document.getElementById('services-grid');
+                const impactGrid = document.getElementById('services-impact-grid');
+                servicesGrid.innerHTML = services.map(service => `
+                    <div id="${service.id}" class="bg-white dark:bg-slate-800/50 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 border border-slate-200 dark:border-slate-700 flex flex-col">
+                        <img class="h-48 w-full object-cover" src="${service.imageUrl}" alt="${service.title}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Error';">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">${service.title}</h3>
+                            <p class="mt-3 text-slate-600 dark:text-slate-300 flex-grow">${service.description}</p>
+                        </div>
+                    </div>`).join('');
+                impactGrid.innerHTML = impacts.map(impact => `
+                    <div class="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-lg border border-slate-200 dark:border-slate-700">
+                        <p class="text-4xl font-extrabold text-cyan-600 dark:text-cyan-400">${impact.value}</p>
+                        <p class="mt-2 text-base font-medium text-slate-600 dark:text-slate-300">${impact.label}</p>
+                    </div>`).join('');
+            };
+
+            const populatePricingPage = () => {
+                const plans = [
+                    { name: "Platform Subscription", price: "Contact Us", description: "Ongoing access to our data and analytics dashboard for commercial fleets and processing companies.", features: ["Real-time Fish Forecasts", "Historical Data Access", "Area of Interest Alerts", "Standard Support"], cta: "Request a Demo", featured: false },
+                    { name: "Custom Solutions", price: "Project-Based", description: "Tailored analysis and development for national mega-projects or specific research needs.", features: ["Bespoke AI Model Development", "In-depth Environmental Analysis", "Dedicated Project Team", "Premium Support"], cta: "Discuss a Project", featured: true },
+                    { name: "Government Contracts", price: "Strategic Partnership", description: "Large-scale contracts for government bodies for pilot studies and national surveillance programs.", features: ["Nation-wide Maritime Monitoring", "Policy Support & Reporting", "Capacity Building & Training", "Strategic Co-creation"], cta: "Initiate a Partnership", featured: false }
+                ];
+                const plansGrid = document.getElementById('pricing-plans-grid');
+                plansGrid.innerHTML = plans.map(plan => `
+                    <div class="relative p-8 bg-white dark:bg-slate-800/50 border rounded-2xl shadow-sm flex flex-col ${plan.featured ? 'border-cyan-500 ring-2 ring-cyan-500' : 'border-slate-200 dark:border-slate-700'}">
+                        ${plan.featured ? '<div class="absolute top-0 py-1.5 px-4 bg-cyan-500 rounded-full text-xs font-semibold tracking-wide text-white uppercase transform -translate-y-1/2 left-1/2 -translate-x-1/2">Most Popular</div>' : ''}
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white">${plan.name}</h3>
+                        <p class="mt-4 text-slate-600 dark:text-slate-300 flex-grow">${plan.description}</p>
+                        <p class="mt-8 text-4xl font-extrabold text-slate-900 dark:text-white">${plan.price}</p>
+                        <ul class="mt-8 space-y-4">
+                            ${plan.features.map(feature => `
+                                <li class="flex items-start">
+                                    <svg class="flex-shrink-0 h-6 w-6 text-green-500 dark:text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                                    <span class="ml-3 text-slate-600 dark:text-slate-300">${feature}</span>
+                                </li>`).join('')}
+                        </ul>
+                        <a href="#" class="nav-button mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium ${plan.featured ? 'bg-cyan-600 text-white hover:bg-cyan-700' : 'bg-cyan-100 text-cyan-700 hover:bg-cyan-200 dark:bg-slate-700 dark:text-cyan-300 dark:hover:bg-slate-600'}" data-page="contact">
+                            ${plan.cta}
+                        </a>
+                    </div>`).join('');
+            };
+
+            // --- RENDER FUNCTIONS ---
+
+            /**
+             * Renders the header component.
+             */
+            const renderHeader = () => {
+                const navLinksHTML = navItems.map(item => `
+                    <button data-page="${item.id}" class="nav-button text-base font-medium transition-colors duration-200 ${currentPage === item.id ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}">
+                        ${item.label}
+                    </button>
+                `).join('');
+
+                const mobileNavLinksHTML = navItems.map(item => `
+                    <button data-page="${item.id}" class="nav-button w-full text-left block px-3 py-2 rounded-md text-base font-medium ${currentPage === item.id ? 'bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'}">
+                        ${item.label}
+                    </button>
+                `).join('');
+
+                const themeIcon = currentTheme === 'light' 
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>` 
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
+                
+                const menuIcon = isMenuOpen
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
+
+                headerContainer.innerHTML = `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex justify-between items-center h-20">
+                            <div class="flex-shrink-0 cursor-pointer nav-button" data-page="home">
+                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                </h1>
+                            </div>
+                            <nav class="hidden md:flex items-center space-x-8">
+                                ${navLinksHTML}
+                                <button id="theme-toggle-desktop" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${themeIcon}</button>
+                                <button data-page="profile" class="nav-button text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                </button>
+                            </nav>
+                            <div class="md:hidden flex items-center">
+                                <button id="theme-toggle-mobile" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">${themeIcon}</button>
+                                <button data-page="profile" class="nav-button text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                </button>
+                                <button id="menu-toggle" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${menuIcon}</button>
+                            </div>
+                        </div>
+                    </div>
+                    ${isMenuOpen ? `
+                    <div class="md:hidden bg-white/95 dark:bg-slate-900/95 border-t border-slate-200 dark:border-slate-800">
+                        <nav class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            ${mobileNavLinksHTML}
+                        </nav>
+                    </div>` : ''}
+                `;
+                
+                // Add event listeners after rendering
+                document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggleTheme);
+                document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+                document.getElementById('menu-toggle')?.addEventListener('click', toggleMenu);
+                addNavButtonListeners();
+            };
+
+            /**
+             * Renders the footer component.
+             */
+            const renderFooter = () => {
+                footerContainer.innerHTML = `
+                    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                            <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                </h1>
+                                <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm">
+                                    Revolutionizing fisheries management with AI and satellite technology for a sustainable future.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white tracking-wider uppercase">Services</h3>
+                                <ul class="mt-4 space-y-2">
+                                    <li><button data-page="services" data-section="strategic-management" class="nav-button text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-left">Strategic Management</button></li>
+                                    <li><button data-page="services" data-section="commercial-intelligence" class="nav-button text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-left">Commercial Intelligence</button></li>
+                                    <li><button data-page="services" data-section="maritime-surveillance" class="nav-button text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-left">Maritime Surveillance</button></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white tracking-wider uppercase">Quick Links</h3>
+                                <ul class="mt-4 space-y-2">
+                                    <li><button data-page="about" class="nav-button text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-left">About Us</button></li>
+                                    <li><button data-page="services" class="nav-button text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-left">Services</button></li>
+                                    <li><button data-page="map" class="nav-button text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-left">Map</button></li>
+                                    <li><button data-page="contact" class="nav-button text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-left">Contact</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-8 border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                            <p class="text-base text-slate-500 dark:text-slate-400 md:order-1">
+                                &copy; ${new Date().getFullYear()} AquaScope. All rights reserved.
+                            </p>
+                            <div class="flex space-x-6 md:order-2 mt-4 md:mt-0">
+                                <!-- Social Icons -->
+                            </div>
+                        </div>
+                    </div>
+                `;
+                addNavButtonListeners();
+            };
+
+            /**
+             * Adds click event listeners to all elements with the 'nav-button' class.
+             */
+            const addNavButtonListeners = () => {
+                document.querySelectorAll('.nav-button').forEach(button => {
+                    // Remove old listener to prevent duplicates
+                    button.replaceWith(button.cloneNode(true));
+                });
+                document.querySelectorAll('.nav-button').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const target = e.currentTarget;
+                        const pageId = target.dataset.page;
+                        const sectionId = target.dataset.section || null;
+                        if (pageId) {
+                            navigateTo(pageId, sectionId);
+                        }
+                    });
+                });
+            };
+
+            // --- INITIALIZATION ---
+            const init = () => {
+                applyTheme();
+                renderHeader();
+                renderFooter();
+                navigateTo('home');
+            };
+
+            init();
+        });
+    </script>
+
+</body>
+</html>

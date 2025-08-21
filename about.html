@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About AquaScope - AI for Global Fisheries</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind CSS Config -->
+    <script>
+      // This configuration script MUST come AFTER the main Tailwind script is loaded.
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              // Sets 'Inter' as the default font family for the site.
+              sans: ['Inter', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Dark mode root variables */
+        html.dark { color-scheme: dark; }
+
+        /* Page transition animation */
+        @keyframes fade-in { 
+            0% { opacity: 0; transform: translateY(10px); } 
+            100% { opacity: 1; transform: translateY(0); } 
+        }
+        .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 font-sans">
+
+    <div id="app-container" class="min-h-screen flex flex-col">
+        <!-- Header: Populated by JavaScript -->
+        <header id="header-container" class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700/50 sticky top-0 z-50">
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content" class="flex-grow">
+            <div class="animate-fade-in">
+                <div class="bg-gradient-to-br from-cyan-600 to-teal-800 dark:from-slate-900 dark:to-slate-800 text-white">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                            <div class="text-center md:text-left">
+                                <span class="inline-block bg-white/10 text-white text-xs font-semibold px-3 py-1 rounded-full">About Us</span>
+                                <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                                    Revolutionizing Fisheries Through Technology
+                                </h1>
+                                <p class="mt-6 text-lg text-cyan-100 dark:text-slate-300">
+                                    At AquaScope, we harness the power of technology to transform marine resource management. By combining satellite data and AI, our innovative platform delivers real-time, accurate insights for fisheries worldwide. Say goodbye to outdated, labor-intensive methods—empower your operations with AquaScope's data-driven solutions.
+                                </p>
+                            </div>
+                            <div class="relative w-full aspect-square max-w-md mx-auto">
+                                <img src="./media/Google_AI_Studio_2025-08-21T09_56_17.959Z.png" alt="Fisheries Monitoring" class="w-full h-full object-cover rounded-2xl shadow-2xl" onerror="this.onerror=null;this.src='https://placehold.co/600x600/cccccc/ffffff?text=Image+Error';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="relative py-16 sm:py-24">
+                    <img src="./media/Google_AI_Studio_2025-08-21T09_58_02.764Z.png" alt="Deep Ocean" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
+                    <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                        <h3 class="text-2xl font-bold">Our Mission</h3>
+                        <p class="mt-4 text-xl text-slate-300">
+                            To revolutionize fisheries management and marine resource monitoring worldwide through the application of advanced remote sensing and artificial intelligence.
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="relative py-16 sm:py-24">
+                     <img src="./media/Google_AI_Studio_2025-08-21T09_58_37.425Z.png" alt="Clear Skies" class="absolute inset-0 w-full h-full object-cover">
+                     <div class="absolute inset-0 bg-cyan-800/60 backdrop-blur-sm"></div>
+                     <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                         <h3 class="text-2xl font-bold">Our Vision</h3>
+                         <p class="mt-4 text-xl text-cyan-100">
+                             To be the cornerstone of a thriving and sustainable Blue Economy, ensuring food security and environmental stewardship for generations to come.
+                         </p>
+                     </div>
+                </div>
+                
+                <div class="relative bg-slate-900 py-16 sm:py-24">
+                    <img src="https://placehold.co/1920x800/020617/FFFFFF?text=Abstract+Data+Pattern" alt="Abstract data visualization" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20" onerror="this.onerror=null;this.src='https://placehold.co/1920x800/020617/FFFFFF?text=Image+Error';">
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center">
+                             <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
+                                 Our Impact by the Numbers
+                             </h2>
+                             <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-300">
+                                 Our technology is designed to deliver tangible, measurable results for national economies and marine environments.
+                             </p>
+                        </div>
+                        <div id="about-impact-grid" class="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 text-center">
+                            <!-- Impact items will be injected by JS -->
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center">
+                            <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                                Our Core Values
+                            </h2>
+                             <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300">
+                                 The principles that guide our work and our partnerships.
+                             </p>
+                        </div>
+                        <dl id="core-values-list" class="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 text-center">
+                            <!-- Values will be injected by JS -->
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer: Populated by JavaScript -->
+        <footer id="footer-container" class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+        </footer>
+    </div>
+
+    <!-- Main Application JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- STATE MANAGEMENT ---
+            let currentTheme = localStorage.getItem('theme') || 'light';
+            let isMenuOpen = false;
+
+            // --- DOM ELEMENTS ---
+            const headerContainer = document.getElementById('header-container');
+            const footerContainer = document.getElementById('footer-container');
+            const mainContent = document.getElementById('main-content');
+
+            // --- DATA ---
+            const navItems = [
+                { id: 'home', label: 'Home', url: './index.html' }, 
+                { id: 'about', label: 'About', url: './about.html' },
+                { id: 'services', label: 'Services', url: './services.html' }, 
+                { id: 'map', label: 'Map', url: './map.html'}, 
+                { id: 'pricing', label: 'Pricing', url: './pricing.html' },
+                { id: 'contact', label: 'Contact', url: './contact.html' },
+            ];
+
+            // --- CORE FUNCTIONS ---
+
+            const applyTheme = () => {
+                const html = document.documentElement;
+                if (currentTheme === 'dark') {
+                    html.classList.add('dark');
+                    html.classList.remove('light');
+                } else {
+                    html.classList.add('light');
+                    html.classList.remove('dark');
+                }
+                localStorage.setItem('theme', currentTheme);
+            };
+
+            const toggleTheme = () => {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                applyTheme();
+                renderHeader();
+            };
+            
+            const toggleMenu = () => {
+                isMenuOpen = !isMenuOpen;
+                renderHeader();
+            };
+
+            // --- DYNAMIC CONTENT POPULATION ---
+            const populateAboutPage = () => {
+                const impacts = [
+                    { value: '+25%', label: 'Increase in Sustainable Fish Yields' },
+                    { value: '90%', label: 'Accuracy in Finding Fishing Zones' },
+                    { value: '-40%', label: 'Reduction in Surveillance & Fuel Costs' },
+                    { value: '-60%', label: 'Decrease in Illegal Fishing Incidents' },
+                ];
+                const values = [
+                    { name: 'Innovation', description: 'We are driven by cutting-edge technology and a relentless pursuit of better solutions.' },
+                    { name: 'Sustainability', description: 'We are committed to the long-term health of marine ecosystems and the communities that depend on them.' },
+                    { name: 'Collaboration', description: 'We build strong partnerships with government, research, and industry to achieve shared goals.' },
+                    { name: 'Integrity', description: 'We operate with transparency, scientific rigor, and a commitment to delivering accurate, reliable data.' },
+                ];
+                const impactContainer = document.getElementById('about-impact-grid');
+                const valuesContainer = document.getElementById('core-values-list');
+                
+                if (impactContainer) {
+                    impactContainer.innerHTML = impacts.map(impact => `
+                        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
+                            <p class="text-4xl font-extrabold text-white">${impact.value}</p>
+                            <p class="mt-2 text-base font-medium text-slate-300">${impact.label}</p>
+                        </div>`).join('');
+                }
+
+                if (valuesContainer) {
+                    valuesContainer.innerHTML = values.map(value => `
+                        <div>
+                            <dt class="text-lg leading-6 font-bold text-slate-900 dark:text-white">${value.name}</dt>
+                            <dd class="mt-2 text-base text-slate-600 dark:text-slate-300">${value.description}</dd>
+                        </div>`).join('');
+                }
+            };
+
+            // --- RENDER FUNCTIONS ---
+            const renderHeader = () => {
+                const currentPageId = 'about'; // Hardcoded for about.html
+                const navLinksHTML = navItems.map(item => `
+                    <a href="${item.url}" class="text-base font-medium transition-colors duration-200 ${currentPageId === item.id ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}">
+                        ${item.label}
+                    </a>
+                `).join('');
+
+                const mobileNavLinksHTML = navItems.map(item => `
+                    <a href="${item.url}" class="w-full text-left block px-3 py-2 rounded-md text-base font-medium ${currentPageId === item.id ? 'bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'}">
+                        ${item.label}
+                    </a>
+                `).join('');
+
+                const themeIcon = currentTheme === 'light' 
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>` 
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
+                
+                const menuIcon = isMenuOpen
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
+
+                headerContainer.innerHTML = `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex justify-between items-center h-20">
+                            <a href="./index.html" class="flex-shrink-0 cursor-pointer">
+                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                </h1>
+                            </a>
+                            <nav class="hidden md:flex items-center space-x-8">
+                                ${navLinksHTML}
+                                <button id="theme-toggle-desktop" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${themeIcon}</button>
+                                <a href="./profile.html" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                </a>
+                            </nav>
+                            <div class="md:hidden flex items-center">
+                                <button id="theme-toggle-mobile" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">${themeIcon}</button>
+                                <a href="./profile.html" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                </a>
+                                <button id="menu-toggle" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${menuIcon}</button>
+                            </div>
+                        </div>
+                    </div>
+                    ${isMenuOpen ? `
+                    <div class="md:hidden bg-white/95 dark:bg-slate-900/95 border-t border-slate-200 dark:border-slate-800">
+                        <nav class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            ${mobileNavLinksHTML}
+                        </nav>
+                    </div>` : ''}
+                `;
+                
+                document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggleTheme);
+                document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+                document.getElementById('menu-toggle')?.addEventListener('click', toggleMenu);
+            };
+
+            const renderFooter = () => {
+                footerContainer.innerHTML = `
+                    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                            <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                </h1>
+                                <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm">
+                                    Revolutionizing fisheries management with AI and satellite technology for a sustainable future.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white tracking-wider uppercase">Services</h3>
+                                <ul class="mt-4 space-y-2">
+                                    <li><a href="./services.html#strategic-management" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Strategic Management</a></li>
+                                    <li><a href="./services.html#commercial-intelligence" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Commercial Intelligence</a></li>
+                                    <li><a href="./services.html#maritime-surveillance" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Maritime Surveillance</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white tracking-wider uppercase">Quick Links</h3>
+                                <ul class="mt-4 space-y-2">
+                                    <li><a href="./about.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">About Us</a></li>
+                                    <li><a href="./services.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Services</a></li>
+                                    <li><a href="./map.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Map</a></li>
+                                    <li><a href="./contact.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-8 border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                            <p class="text-base text-slate-500 dark:text-slate-400 md:order-1">
+                                &copy; ${new Date().getFullYear()} AquaScope. All rights reserved.
+                            </p>
+                            <div class="flex space-x-6 md:order-2 mt-4 md:mt-0">
+                                <!-- Social Icons -->
+                            </div>
+                        </div>
+                    </div>
+                `;
+            };
+
+            // --- INITIALIZATION ---
+            const init = () => {
+                applyTheme();
+                renderHeader();
+                renderFooter();
+                populateAboutPage(); // Populate the dynamic sections
+            };
+
+            init();
+        });
+    </script>
+
+</body>
+</html>

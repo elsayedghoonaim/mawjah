@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - AquaScope</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind CSS Config -->
+    <script>
+      // This configuration script MUST come AFTER the main Tailwind script is loaded.
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              // Sets 'Inter' as the default font family for the site.
+              sans: ['Inter', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Dark mode root variables */
+        html.dark { color-scheme: dark; }
+
+        /* Page transition animation */
+        @keyframes fade-in { 
+            0% { opacity: 0; transform: translateY(10px); } 
+            100% { opacity: 1; transform: translateY(0); } 
+        }
+        .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 font-sans">
+
+    <div id="app-container" class="min-h-screen flex flex-col">
+        <!-- Header: Populated by JavaScript -->
+        <header id="header-container" class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700/50 sticky top-0 z-50">
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content" class="flex-grow">
+            <div class="animate-fade-in">
+                <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center">
+                            <h2 class="text-base font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Our Services</h2>
+                            <p class="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                                Data-Driven Solutions for the Marine Sector
+                            </p>
+                            <p class="mt-5 max-w-prose mx-auto text-xl text-slate-600 dark:text-slate-300">
+                                We translate complex satellite data into actionable intelligence for the entire fisheries value chain.
+                            </p>
+                        </div>
+    
+                        <div id="services-grid" class="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+                            <!-- Service cards will be injected by JS -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-slate-900/50 py-16 sm:py-24">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center">
+                             <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                                 Real Impact, Real Results
+                             </h2>
+                             <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300">
+                                 Our services deliver tangible, measurable outcomes that boost efficiency, profitability, and sustainability.
+                             </p>
+                        </div>
+                        <div id="services-impact-grid" class="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 text-center">
+                            <!-- Impact items will be injected by JS -->
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-16">
+                            <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                                Service Spotlights
+                            </h2>
+                            <p class="mt-4 text-xl text-slate-600 dark:text-slate-300">
+                                A closer look at how our services create value.
+                            </p>
+                        </div>
+                        <div class="space-y-16">
+                            <div class="flex flex-col md:flex-row gap-8 items-center">
+                                <img src="./media/Google_AI_Studio_2025-08-21T10_03_32.820Z.png" alt="Strategic Planning" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found';">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Strategic Fisheries Management</h3>
+                                    <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">We empower governments and research institutions with comprehensive data dashboards. This enables effective policy-making, ensures long-term sustainability, and helps secure national food supplies by providing a clear picture of marine resources.</p>
+                                </div>
+                            </div>
+                             <div class="flex flex-col md:flex-row-reverse gap-8 items-center">
+                                <img src="./media/Google_AI_Studio_2025-08-21T10_06_37.898Z.png" alt="Commercial Fishing" class="w-full md:w-1/2 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found';">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Commercial Fishing Intelligence</h3>
+                                    <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">Our platform provides commercial fleets with a decisive advantage. By identifying high-potential fishing zones through satellite data, we help reduce fuel consumption and search times, directly boosting profitability and operational efficiency.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer: Populated by JavaScript -->
+        <footer id="footer-container" class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+        </footer>
+    </div>
+
+    <!-- Main Application JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- STATE MANAGEMENT ---
+            let currentTheme = localStorage.getItem('theme') || 'light';
+            let isMenuOpen = false;
+
+            // --- DOM ELEMENTS ---
+            const headerContainer = document.getElementById('header-container');
+            const footerContainer = document.getElementById('footer-container');
+
+            // --- DATA ---
+            const navItems = [
+                { id: 'home', label: 'Home', url: './index.html' }, 
+                { id: 'about', label: 'About', url: './about.html' },
+                { id: 'services', label: 'Services', url: './services.html' }, 
+                { id: 'map', label: 'Map', url: './map.html'}, 
+                { id: 'pricing', label: 'Pricing', url: './pricing.html' },
+                { id: 'contact', label: 'Contact', url: './contact.html' },
+            ];
+
+            // --- CORE FUNCTIONS ---
+            const applyTheme = () => {
+                const html = document.documentElement;
+                if (currentTheme === 'dark') {
+                    html.classList.add('dark');
+                    html.classList.remove('light');
+                } else {
+                    html.classList.add('light');
+                    html.classList.remove('dark');
+                }
+                localStorage.setItem('theme', currentTheme);
+            };
+
+            const toggleTheme = () => {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                applyTheme();
+                renderHeader();
+            };
+            
+            const toggleMenu = () => {
+                isMenuOpen = !isMenuOpen;
+                renderHeader();
+            };
+
+            // --- DYNAMIC CONTENT POPULATION ---
+            const populateServicesPage = () => {
+                const services = [
+                    { id: "strategic-management", title: "Strategic Fisheries Management", description: "Comprehensive data and analytics for government and research bodies to support national food security, sustainable management, and long-term yield growth.", imageUrl: "./media/ChatGPT Image Aug 21, 2025, 02_18_20 PM.png" },
+                    { id: "commercial-intelligence", title: "Commercial Fishing Intelligence", description: "Satellite-based forecasts pinpoint promising fishing zones, drastically reducing search times and fuel costs for commercial fleets to maximize profitability.", imageUrl: "./media/ChatGPT Image Aug 21, 2025, 02_22_10 PM.png" },
+                    { id: "maritime-surveillance", title: "Maritime Surveillance & Compliance", description: "A cost-effective solution for regulatory bodies and exporters to combat illegal fishing and meet international traceability requirements.", imageUrl: "./media/ChatGPT Image Aug 21, 2025, 02_25_37 PM.png" }
+                ];
+                const impacts = [
+                    { value: '+25%', label: 'Increase in Sustainable Fish Yields' },
+                    { value: '90%', label: 'Accuracy in Finding Fishing Zones' },
+                    { value: '-40%', label: 'Reduction in Surveillance & Fuel Costs' },
+                    { value: '-60%', label: 'Decrease in Illegal Fishing Incidents' },
+                ];
+                const servicesGrid = document.getElementById('services-grid');
+                const impactGrid = document.getElementById('services-impact-grid');
+                if(servicesGrid) {
+                    servicesGrid.innerHTML = services.map(service => `
+                        <div id="${service.id}" class="bg-white dark:bg-slate-800/50 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 border border-slate-200 dark:border-slate-700 flex flex-col">
+                            <img class="h-48 w-full object-cover" src="${service.imageUrl}" alt="${service.title}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Error';">
+                            <div class="p-6 flex-grow flex flex-col">
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">${service.title}</h3>
+                                <p class="mt-3 text-slate-600 dark:text-slate-300 flex-grow">${service.description}</p>
+                            </div>
+                        </div>`).join('');
+                }
+                if(impactGrid) {
+                    impactGrid.innerHTML = impacts.map(impact => `
+                        <div class="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-lg border border-slate-200 dark:border-slate-700">
+                            <p class="text-4xl font-extrabold text-cyan-600 dark:text-cyan-400">${impact.value}</p>
+                            <p class="mt-2 text-base font-medium text-slate-600 dark:text-slate-300">${impact.label}</p>
+                        </div>`).join('');
+                }
+            };
+
+            // --- RENDER FUNCTIONS ---
+            const renderHeader = () => {
+                const currentPageId = 'services'; // Hardcoded for services.html
+                const navLinksHTML = navItems.map(item => `
+                    <a href="${item.url}" class="text-base font-medium transition-colors duration-200 ${currentPageId === item.id ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}">
+                        ${item.label}
+                    </a>
+                `).join('');
+
+                const mobileNavLinksHTML = navItems.map(item => `
+                    <a href="${item.url}" class="w-full text-left block px-3 py-2 rounded-md text-base font-medium ${currentPageId === item.id ? 'bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'}">
+                        ${item.label}
+                    </a>
+                `).join('');
+
+                const themeIcon = currentTheme === 'light' 
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>` 
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
+                
+                const menuIcon = isMenuOpen
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
+
+                headerContainer.innerHTML = `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex justify-between items-center h-20">
+                            <a href="./index.html" class="flex-shrink-0 cursor-pointer">
+                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                </h1>
+                            </a>
+                            <nav class="hidden md:flex items-center space-x-8">
+                                ${navLinksHTML}
+                                <button id="theme-toggle-desktop" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${themeIcon}</button>
+                                <a href="./profile.html" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                </a>
+                            </nav>
+                            <div class="md:hidden flex items-center">
+                                <button id="theme-toggle-mobile" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">${themeIcon}</button>
+                                <a href="./profile.html" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                </a>
+                                <button id="menu-toggle" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${menuIcon}</button>
+                            </div>
+                        </div>
+                    </div>
+                    ${isMenuOpen ? `
+                    <div class="md:hidden bg-white/95 dark:bg-slate-900/95 border-t border-slate-200 dark:border-slate-800">
+                        <nav class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            ${mobileNavLinksHTML}
+                        </nav>
+                    </div>` : ''}
+                `;
+                
+                document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggleTheme);
+                document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+                document.getElementById('menu-toggle')?.addEventListener('click', toggleMenu);
+            };
+
+            const renderFooter = () => {
+                footerContainer.innerHTML = `
+                    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                            <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
+                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                </h1>
+                                <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm">
+                                    Revolutionizing fisheries management with AI and satellite technology for a sustainable future.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white tracking-wider uppercase">Services</h3>
+                                <ul class="mt-4 space-y-2">
+                                    <li><a href="./services.html#strategic-management" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Strategic Management</a></li>
+                                    <li><a href="./services.html#commercial-intelligence" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Commercial Intelligence</a></li>
+                                    <li><a href="./services.html#maritime-surveillance" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Maritime Surveillance</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white tracking-wider uppercase">Quick Links</h3>
+                                <ul class="mt-4 space-y-2">
+                                    <li><a href="./about.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">About Us</a></li>
+                                    <li><a href="./services.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Services</a></li>
+                                    <li><a href="./map.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Map</a></li>
+                                    <li><a href="./contact.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-8 border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                            <p class="text-base text-slate-500 dark:text-slate-400 md:order-1">
+                                &copy; ${new Date().getFullYear()} AquaScope. All rights reserved.
+                            </p>
+                            <div class="flex space-x-6 md:order-2 mt-4 md:mt-0">
+                                <!-- Social Icons -->
+                            </div>
+                        </div>
+                    </div>
+                `;
+            };
+
+            // --- INITIALIZATION ---
+            const init = () => {
+                applyTheme();
+                renderHeader();
+                renderFooter();
+                populateServicesPage(); // Populate the dynamic sections
+            };
+
+            init();
+        });
+    </script>
+
+</body>
+</html>
