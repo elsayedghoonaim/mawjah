@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaScope - Home</title>
+    <title>Mawjah - Home</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind CSS Config -->
     <script>
       // This configuration script MUST come AFTER the main Tailwind script is loaded.
       tailwind.config = {
@@ -24,12 +22,10 @@
       }
     </script>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display.swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Custom Styles -->
     <style>
         /* Dark mode root variables */
         html.dark { color-scheme: dark; }
@@ -40,77 +36,108 @@
             100% { opacity: 1; transform: translateY(0); } 
         }
         .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+
+        /* Light Mode Background Gradient */
+        html.light body {
+            background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+        }
+
+        /* Dark Mode Background Gradient */
+        html.dark body {
+            background: linear-gradient(135deg, #001f3f 0%, #004d7a 100%);
+        }
+
+        /* Removing default browser margin */
+        body {
+            margin: 0;
+        }
+
+        /* Icon Hover Animation */
+        @keyframes icon-bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .icon-wrapper:hover svg {
+            animation: icon-bounce 0.6s ease-in-out;
+        }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 font-sans">
+<body class="font-sans">
 
     <div id="app-container" class="min-h-screen flex flex-col">
-        <!-- Header: Populated by JavaScript -->
         <header id="header-container" class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700/50 sticky top-0 z-50">
         </header>
 
-        <!-- Main Content -->
         <main id="main-content" class="flex-grow">
             <div class="animate-fade-in">
-                <!-- Hero Section -->
-                <div class="relative">
-                    <!-- Background Image -->
-                    <img src="./media/Google_AI_Studio_2025-08-21T11_10_33.935Z.png" alt="Fisherman holding a large fish" class="absolute inset-0 w-full h-full object-cover">
-                    <!-- Overlay -->
-                    <div class="absolute inset-0 bg-slate-800/60"></div>
+                <div class="relative h-[85vh] flex items-center justify-center overflow-hidden">
+                    <div id="hero-slider-wrapper" class="absolute inset-0 h-full flex transition-transform duration-1000 ease-in-out" style="width: 200%;">
+                        <div class="w-full h-full bg-cover bg-center" style="background-image: url('./media/Google_AI_Studio_2025-08-21T11_10_33.935Z.png');"></div>
+                        <div class="w-full h-full bg-cover bg-center" style="background-image: url('./media/Google_AI_Studio_2025-08-21T10_03_32.820Z.png');"></div>
+                    </div>
                     
-                    <!-- Centered Content -->
-                    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-48 text-center">
-                        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+                    <div class="absolute inset-0 bg-slate-800/60 z-10"></div>
+                    
+                    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-20">
+                        <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
                             Revolutionizing Egypt's Fisheries with AI
                         </h1>
-                        <p class="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-slate-200">
-                            AquaScope delivers data-driven insights for sustainable fisheries management, enhanced profitability, and secure marine resources.
+                        <p class="mt-8 max-w-3xl mx-auto text-xl sm:text-2xl text-slate-200">
+                            Mawjah delivers data-driven insights for sustainable fisheries management, enhanced profitability, and secure marine resources.
                         </p>
-                        <div class="mt-8">
-                            <a href="./services.html" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 md:py-4 md:text-lg md:px-10 transition-transform transform hover:scale-105">
+                        <div class="mt-10">
+                            <a href="./services.html" class="inline-flex items-center justify-center px-10 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 md:py-5 md:text-xl md:px-12 transition-transform transform hover:scale-105">
                                 Explore Solutions
                             </a>
                         </div>
                     </div>
                 </div>
     
-                <!-- Value Proposition Section -->
-                <div class="bg-white dark:bg-slate-900/50 py-16 sm:py-24">
+                <div class="py-20 sm:py-28 bg-white dark:bg-slate-900">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="text-center mb-16">
-                            <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                        <div class="text-center mb-20">
+                            <h2 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
                                 A New Wave of Marine Intelligence
                             </h2>
-                            <p class="mt-4 text-xl text-slate-600 dark:text-slate-300">
+                            <p class="mt-6 text-xl text-slate-600 dark:text-slate-300">
                                 We provide tangible benefits to all stakeholders in the marine ecosystem.
                             </p>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-14">
                             <div class="text-center">
-                                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 mx-auto mb-6">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><line x1="12" x2="12" y1="20" y2="10" /><line x1="18" x2="18" y1="20" y2="4" /><line x1="6" x2="6" y1="20" y2="16" /></svg>
+                                <div class="icon-wrapper flex items-center justify-center h-20 w-20 rounded-full bg-cyan-100 dark:bg-slate-800 mx-auto mb-8">
+                                    <svg class="h-10 w-10 text-cyan-600 dark:text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+                                    </svg>
                                 </div>
-                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Enhance National Yields</h3>
-                                <p class="text-slate-600 dark:text-slate-300">
+                                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Enhance National Yields</h3>
+                                <p class="text-lg text-slate-600 dark:text-slate-300">
                                     Providing government bodies with the data needed for long-term growth and food security.
                                 </p>
                             </div>
                             <div class="text-center">
-                                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 mx-auto mb-6">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><path d="M6.5 12c.9-2.4 3.1-4 5.5-4s4.6 1.6 5.5 4" /><path d="M18 12h.5a2.5 2.5 0 0 1 0 5h-.5" /><path d="M6 12H5.5a2.5 2.5 0 0 0 0 5H6" /><path d="M16.5 17c-.9 2.4-3.1 4-5.5 4s-4.6-1.6-5.5-4" /><path d="M18 5a1.5 1.5 0 0 1 0 3" /><path d="M6 5a1.5 1.5 0 0 0 0 3" /></svg>
+                                <div class="icon-wrapper flex items-center justify-center h-20 w-20 rounded-full bg-cyan-100 dark:bg-slate-800 mx-auto mb-8">
+                                    <svg class="h-10 w-10 text-cyan-600 dark:text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
                                 </div>
-                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Boost Commercial Fishing</h3>
-                                <p class="text-slate-600 dark:text-slate-300">
+                                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Boost Commercial Fishing</h3>
+                                <p class="text-lg text-slate-600 dark:text-slate-300">
                                     Identifying promising fishing zones with satellite forecasts to increase profitability and reduce fuel costs.
                                 </p>
                             </div>
                             <div class="text-center">
-                                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 mx-auto mb-6">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><path d="M7 4a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V4Z" /><path d="m10 8 3.9-3.9" /><path d="M12 12h.01" /><path d="M5.1 13.8 4 15" /><path d="m19 9-1.1 1.1" /><path d="M21 12v2a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2Z" /><path d="M3 12v-2a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2Z" /></svg>
+                                <div class="icon-wrapper flex items-center justify-center h-20 w-20 rounded-full bg-cyan-100 dark:bg-slate-800 mx-auto mb-8">
+                                    <svg class="h-10 w-10 text-cyan-600 dark:text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" />
+                                    </svg>
                                 </div>
-                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Secure Marine Territories</h3>
-                                <p class="text-slate-600 dark:text-slate-300">
+                                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Secure Marine Territories</h3>
+                                <p class="text-lg text-slate-600 dark:text-slate-300">
                                     Offering cost-effective maritime surveillance to combat illegal fishing and assert sovereignty.
                                 </p>
                             </div>
@@ -118,81 +145,85 @@
                     </div>
                 </div>
                 
-                <!-- Visual Showcase Section -->
-                <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                <div class="py-20 sm:py-28">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="text-center mb-16">
-                            <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                        <div class="text-center mb-20">
+                            <h2 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
                                 Visualizing a Sustainable Future
                             </h2>
-                            <p class="mt-4 text-xl text-slate-600 dark:text-slate-300">
+                            <p class="mt-6 text-xl text-slate-600 dark:text-slate-300">
                                 Explore how our technology translates complex data into clear, actionable insights.
                             </p>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                            <div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                            <div class="transform hover:-translate-y-2 transition-transform duration-300">
                                 <img class="object-cover shadow-lg rounded-lg aspect-square" src="./media/Google_AI_Studio_2025-08-21T09_53_03.707Z.png" alt="Map with data overlay" onerror="this.onerror=null;this.src='https://placehold.co/600x600/cccccc/ffffff?text=Image+Not+Found';">
-                                <div class="mt-4 text-center">
-                                    <h2 class="text-2xl font-semibold text-slate-800 dark:text-white mb-2">Satellite Data Overlay</h2>
-                                    <p class="text-slate-600 dark:text-slate-300 mt-1">Fusing satellite imagery with data layers to reveal invisible patterns.</p>
+                                <div class="mt-5 text-center">
+                                    <h3 class="text-2xl font-semibold text-slate-800 dark:text-white mb-2">Satellite Data Overlay</h3>
+                                    <p class="text-lg text-slate-600 dark:text-slate-300 mt-1">Fusing satellite imagery with data layers to reveal invisible patterns.</p>
                                 </div>
                             </div>
-                            <div>
+                            <div class="transform hover:-translate-y-2 transition-transform duration-300">
                                 <img class="object-cover shadow-lg rounded-lg aspect-square" src="./media/Google_AI_Studio_2025-08-21T09_54_02.865Z.png" alt="Fishing vessel at sea" onerror="this.onerror=null;this.src='https://placehold.co/600x600/cccccc/ffffff?text=Image+Not+Found';">
-                                 <div class="mt-4 text-center">
-                                    <h2 class="text-2xl font-semibold text-slate-800 dark:text-white mb-2">On-Vessel Intelligence</h2>
-                                    <p class="text-slate-600 dark:text-slate-300 mt-1">Delivering critical insights directly to the bridge for efficient voyages.</p>
+                                 <div class="mt-5 text-center">
+                                    <h3 class="text-2xl font-semibold text-slate-800 dark:text-white mb-2">On-Vessel Intelligence</h3>
+                                    <p class="text-lg text-slate-600 dark:text-slate-300 mt-1">Delivering critical insights directly to the bridge for efficient voyages.</p>
                                 </div>
                             </div>
-                            <div>
+                            <div class="transform hover:-translate-y-2 transition-transform duration-300">
                                 <img class="object-cover shadow-lg rounded-lg aspect-square" src="./media/Google_AI_Studio_2025-08-21T09_54_37.946Z.png" alt="Underwater marine life" onerror="this.onerror=null;this.src='https://placehold.co/600x600/cccccc/ffffff?text=Image+Not+Found';">
-                                 <div class="mt-4 text-center">
-                                    <h2 class="text-2xl font-semibold text-slate-800 dark:text-white mb-2">Ecosystem Monitoring</h2>
-                                    <p class="text-slate-600 dark:text-slate-300 mt-1">Tracking marine health to ensure sustainability and protect biodiversity.</p>
+                                 <div class="mt-5 text-center">
+                                    <h3 class="text-2xl font-semibold text-slate-800 dark:text-white mb-2">Ecosystem Monitoring</h3>
+                                    <p class="text-lg text-slate-600 dark:text-slate-300 mt-1">Tracking marine health to ensure sustainability and protect biodiversity.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
     
-                <!-- How It Works Section -->
-                <div class="bg-white dark:bg-slate-900/50 py-16 sm:py-24">
+                <div class="py-20 sm:py-28 bg-white dark:bg-slate-900">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="text-center mb-16">
-                            <h2 class="text-base font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Process</h2>
-                            <p class="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                        <div class="text-center mb-20">
+                            <h2 class="text-lg font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Process</h2>
+                            <p class="mt-2 text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-5xl">
                                 How It Works
                             </p>
-                            <p class="mt-4 text-xl text-slate-600 dark:text-slate-300">
+                            <p class="mt-6 text-xl text-slate-600 dark:text-slate-300">
                                 From raw satellite data to actionable intelligence in three simple steps.
                             </p>
                         </div>
                         <div class="relative">
-                            <div class="absolute left-1/2 -translate-x-1/2 top-8 w-px h-2/3 bg-slate-300 dark:bg-slate-700 hidden md:block" aria-hidden="true"></div>
+                            <div class="absolute left-1/2 -translate-x-1/2 top-10 w-px h-2/3 bg-slate-300 dark:bg-slate-700 hidden md:block" aria-hidden="true"></div>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
                                 <div class="text-center">
-                                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 shadow-md mx-auto mb-6 relative">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M3 5V19A9 3 0 0 0 12 22A9 3 0 0 0 21 19V5" /><path d="M3 12A9 3 0 0 0 12 15A9 3 0 0 0 21 12" /><path d="M16 12l-4 6h6l-4 6" /></svg>
-                                        <span class="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-white font-bold">1</span>
+                                    <div class="icon-wrapper flex items-center justify-center h-20 w-20 rounded-full bg-cyan-100 dark:bg-slate-800 shadow-md mx-auto mb-8 relative">
+                                        <svg class="h-10 w-10 text-cyan-600 dark:text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                                        </svg>
+                                        <span class="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-white font-bold text-lg">1</span>
                                     </div>
-                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Data Acquisition</h3>
-                                    <p class="text-slate-600 dark:text-slate-300">We aggregate vast amounts of satellite imagery, weather data, and ground-truth information from our partners.</p>
+                                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Data Acquisition</h3>
+                                    <p class="text-lg text-slate-600 dark:text-slate-300">We aggregate vast amounts of satellite imagery, weather data, and ground-truth information from our partners.</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 shadow-md mx-auto mb-6 relative">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><path d="M12 5a3 3 0 1 0-5.99-1.01" /><path d="M12 5a3 3 0 1 1 5.99-1.01" /><path d="M15 13a3 3 0 1 0-6 0" /><path d="M12 13h.01" /><path d="M12 16a3 3 0 1 1-6 0" /><path d="M12 16h.01" /><path d="M18 13a3 3 0 1 1-6 0" /><path d="M18 13h.01" /><path d="M6 13a3 3 0 1 0 6 0" /><path d="M6 13H5.99" /><path d="M12 20a3 3 0 1 0-1.5-5.66" /><path d="M12 20a3 3 0 1 1 1.5-5.66" /><path d="M12 5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path d="M12 5V2" /><path d="M15 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" /><path d="M15 13v-1.5" /><path d="M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path d="M12 16v-1.5" /><path d="M9 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path d="M9 13v-1.5" /><path d="M12 20a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" /><path d="M12 20v-1.5" /></svg>
-                                        <span class="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-white font-bold">2</span>
+                                    <div class="icon-wrapper flex items-center justify-center h-20 w-20 rounded-full bg-cyan-100 dark:bg-slate-800 shadow-md mx-auto mb-8 relative">
+                                        <svg class="h-10 w-10 text-cyan-600 dark:text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                                        </svg>
+                                        <span class="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-white font-bold text-lg">2</span>
                                     </div>
-                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">AI Analysis</h3>
-                                    <p class="text-slate-600 dark:text-slate-300">Our proprietary Machine Learning models process and analyze the data to identify patterns and generate predictive forecasts.</p>
+                                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">AI Analysis</h3>
+                                    <p class="text-lg text-slate-600 dark:text-slate-300">Our proprietary Machine Learning models process and analyze the data to identify patterns and generate predictive forecasts.</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 dark:bg-slate-800 shadow-md mx-auto mb-6 relative">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-cyan-600 dark:text-cyan-400"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="M12 11h4" /><path d="M12 16h4" /><path d="M8 11h.01" /><path d="M8 16h.01" /></svg>
-                                        <span class="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-white font-bold">3</span>
+                                    <div class="icon-wrapper flex items-center justify-center h-20 w-20 rounded-full bg-cyan-100 dark:bg-slate-800 shadow-md mx-auto mb-8 relative">
+                                        <svg class="h-10 w-10 text-cyan-600 dark:text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v16.5h16.5V3.75H3.75zM9 9.75h6.75m-6.75 4.5h6.75m-1.5-7.5l.75 7.5m-4.5-7.5l.75 7.5" />
+                                        </svg>
+                                        <span class="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-white font-bold text-lg">3</span>
                                     </div>
-                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Actionable Insights</h3>
-                                    <p class="text-slate-600 dark:text-slate-300">The results are delivered through our intuitive platform as clear, actionable reports and alerts for decision-making.</p>
+                                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Actionable Insights</h3>
+                                    <p class="text-lg text-slate-600 dark:text-slate-300">The results are delivered through our intuitive platform as clear, actionable reports and alerts for decision-making.</p>
                                 </div>
                             </div>
                         </div>
@@ -201,23 +232,18 @@
             </div>
         </main>
 
-        <!-- Footer: Populated by JavaScript -->
         <footer id="footer-container" class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
         </footer>
     </div>
 
-    <!-- Main Application JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- STATE MANAGEMENT ---
             let currentTheme = localStorage.getItem('theme') || 'light';
             let isMenuOpen = false;
 
-            // --- DOM ELEMENTS ---
             const headerContainer = document.getElementById('header-container');
             const footerContainer = document.getElementById('footer-container');
 
-            // --- DATA ---
             const navItems = [
                 { id: 'home', label: 'Home', url: './index.html' }, 
                 { id: 'about', label: 'About', url: './about.html' },
@@ -227,11 +253,6 @@
                 { id: 'contact', label: 'Contact', url: './contact.html' },
             ];
 
-            // --- CORE FUNCTIONS ---
-
-            /**
-             * Applies the current theme to the document.
-             */
             const applyTheme = () => {
                 const html = document.documentElement;
                 if (currentTheme === 'dark') {
@@ -244,30 +265,35 @@
                 localStorage.setItem('theme', currentTheme);
             };
 
-            /**
-             * Toggles the theme between 'light' and 'dark'.
-             */
             const toggleTheme = () => {
                 currentTheme = currentTheme === 'light' ? 'dark' : 'light';
                 applyTheme();
-                renderHeader(); // Re-render header to update theme icon
+                renderHeader();
             };
             
-            /**
-             * Toggles the mobile navigation menu.
-             */
             const toggleMenu = () => {
                 isMenuOpen = !isMenuOpen;
                 renderHeader();
             };
 
-            // --- RENDER FUNCTIONS ---
+            const initHeroSlider = () => {
+                const sliderWrapper = document.getElementById('hero-slider-wrapper');
+                if (!sliderWrapper) return;
 
-            /**
-             * Renders the header component.
-             */
+                const slides = sliderWrapper.children;
+                if (slides.length < 2) return;
+
+                let currentSlide = 0;
+                const totalSlides = slides.length;
+
+                setInterval(() => {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    sliderWrapper.style.transform = `translateX(-${(currentSlide * 100) / totalSlides}%)`;
+                }, 5000); // Change image every 5 seconds
+            };
+
             const renderHeader = () => {
-                const currentPageId = 'home'; // Hardcoded for home.html
+                const currentPageId = 'home';
                 const navLinksHTML = navItems.map(item => `
                     <a href="${item.url}" class="text-base font-medium transition-colors duration-200 ${currentPageId === item.id ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}">
                         ${item.label}
@@ -281,32 +307,32 @@
                 `).join('');
 
                 const themeIcon = currentTheme === 'light' 
-                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>` 
-                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>` 
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
                 
                 const menuIcon = isMenuOpen
-                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
-                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
 
                 headerContainer.innerHTML = `
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex justify-between items-center h-20">
                             <a href="./index.html" class="flex-shrink-0 cursor-pointer">
-                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
-                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                <h1 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
+                                    Mawjah
                                 </h1>
                             </a>
                             <nav class="hidden md:flex items-center space-x-8">
                                 ${navLinksHTML}
                                 <button id="theme-toggle-desktop" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${themeIcon}</button>
-                                <a href="./profile.html" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                <a href="./signin.html" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 transition-colors">
+                                    Sign In
                                 </a>
                             </nav>
                             <div class="md:hidden flex items-center">
                                 <button id="theme-toggle-mobile" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">${themeIcon}</button>
-                                <a href="./profile.html" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                <a href="./signin.html" class="text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
+                                    Sign In
                                 </a>
                                 <button id="menu-toggle" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${menuIcon}</button>
                             </div>
@@ -320,22 +346,18 @@
                     </div>` : ''}
                 `;
                 
-                // Add event listeners after rendering
                 document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggleTheme);
                 document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
                 document.getElementById('menu-toggle')?.addEventListener('click', toggleMenu);
             };
 
-            /**
-             * Renders the footer component.
-             */
             const renderFooter = () => {
                 footerContainer.innerHTML = `
                     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                             <div class="col-span-1 md:col-span-2 lg:col-span-1">
-                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
-                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                <h1 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
+                                    Mawjah
                                 </h1>
                                 <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm">
                                     Revolutionizing fisheries management with AI and satellite technology for a sustainable future.
@@ -361,21 +383,20 @@
                         </div>
                         <div class="mt-8 border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
                             <p class="text-base text-slate-500 dark:text-slate-400 md:order-1">
-                                &copy; ${new Date().getFullYear()} AquaScope. All rights reserved.
+                                &copy; ${new Date().getFullYear()} Mawjah. All rights reserved.
                             </p>
                             <div class="flex space-x-6 md:order-2 mt-4 md:mt-0">
-                                <!-- Social Icons -->
-                            </div>
+                                </div>
                         </div>
                     </div>
                 `;
             };
 
-            // --- INITIALIZATION ---
             const init = () => {
                 applyTheme();
                 renderHeader();
                 renderFooter();
+                initHeroSlider();
             };
 
             init();

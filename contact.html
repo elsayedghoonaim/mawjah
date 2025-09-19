@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - AquaScope</title>
+    <title>Contact Us - Mawjah</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind CSS Config -->
     <script>
-      // This configuration script MUST come AFTER the main Tailwind script is loaded.
       tailwind.config = {
         darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
-              // Sets 'Inter' as the default font family for the site.
               sans: ['Inter', 'sans-serif'],
             },
           }
@@ -24,66 +20,72 @@
       }
     </script>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Custom Styles -->
     <style>
-        /* Dark mode root variables */
         html.dark { color-scheme: dark; }
 
-        /* Page transition animation */
         @keyframes fade-in { 
             0% { opacity: 0; transform: translateY(10px); } 
             100% { opacity: 1; transform: translateY(0); } 
         }
         .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+
+        html.light body {
+            background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+        }
+
+        /* Updated dark mode background */
+        html.dark body {
+            background: linear-gradient(135deg, #001f3f 0%, #004d7a 100%);
+        }
+        body {
+            margin: 0;
+        }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 font-sans">
+<body class="font-sans">
 
     <div id="app-container" class="min-h-screen flex flex-col">
-        <!-- Header: Populated by JavaScript -->
         <header id="header-container" class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700/50 sticky top-0 z-50">
         </header>
 
-        <!-- Main Content -->
         <main id="main-content" class="flex-grow">
             <div class="animate-fade-in">
-                <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                <div class="py-20 sm:py-28">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center">
-                            <h2 class="text-base font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Contact Us</h2>
-                            <p class="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                            <h2 class="text-lg font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Contact Us</h2>
+                            <p class="mt-2 text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-5xl">
                                 Let's Build the Future Together
                             </p>
-                            <p class="mt-5 max-w-prose mx-auto text-xl text-slate-600 dark:text-slate-300">
+                            <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-600 dark:text-slate-300">
                                 Whether you're a government official, a fleet owner, or a potential partner, we'd love to hear from you.
                             </p>
                         </div>
-                        <div class="mt-12 max-w-lg mx-auto">
-                            <div class="bg-white dark:bg-slate-800/50 p-8 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700">
-                                <form id="contact-form" class="grid grid-cols-1 gap-y-6">
+                        <div class="mt-16 max-w-2xl mx-auto">
+                            <div class="bg-white dark:bg-slate-800/50 p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
+                                <form id="contact-form" class="grid grid-cols-1 gap-y-8">
                                     <div>
                                         <label for="full-name" class="sr-only">Full name</label>
-                                        <input type="text" name="full-name" id="full-name" required class="block w-full shadow-sm py-3 px-4 bg-white dark:bg-slate-900 placeholder-slate-500 dark:placeholder-slate-400 border-slate-300 dark:border-slate-700 rounded-md focus:ring-cyan-500 focus:border-cyan-500" placeholder="Full name" />
+                                        <input type="text" name="full-name" id="full-name" required class="block w-full shadow-sm py-4 px-5 text-lg bg-white dark:bg-slate-900 placeholder-slate-500 dark:placeholder-slate-400 border-slate-300 dark:border-slate-700 rounded-md focus:ring-cyan-500 focus:border-cyan-500" placeholder="Full name" />
                                     </div>
                                     <div>
                                         <label for="email" class="sr-only">Email</label>
-                                        <input id="email" name="email" type="email" required class="block w-full shadow-sm py-3 px-4 bg-white dark:bg-slate-900 placeholder-slate-500 dark:placeholder-slate-400 border-slate-300 dark:border-slate-700 rounded-md focus:ring-cyan-500 focus:border-cyan-500" placeholder="Email" />
+                                        <input id="email" name="email" type="email" required class="block w-full shadow-sm py-4 px-5 text-lg bg-white dark:bg-slate-900 placeholder-slate-500 dark:placeholder-slate-400 border-slate-300 dark:border-slate-700 rounded-md focus:ring-cyan-500 focus:border-cyan-500" placeholder="Email" />
                                     </div>
                                     <div>
                                         <label for="message" class="sr-only">Message</label>
-                                        <textarea id="message" name="message" rows="4" required class="block w-full shadow-sm py-3 px-4 bg-white dark:bg-slate-900 placeholder-slate-500 dark:placeholder-slate-400 border-slate-300 dark:border-slate-700 rounded-md focus:ring-cyan-500 focus:border-cyan-500" placeholder="Message"></textarea>
+                                        <textarea id="message" name="message" rows="5" required class="block w-full shadow-sm py-4 px-5 text-lg bg-white dark:bg-slate-900 placeholder-slate-500 dark:placeholder-slate-400 border-slate-300 dark:border-slate-700 rounded-md focus:ring-cyan-500 focus:border-cyan-500" placeholder="Message"></textarea>
                                     </div>
                                     <div>
-                                        <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+                                        <button type="submit" class="w-full inline-flex items-center justify-center px-8 py-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-transform transform hover:scale-105">
                                             Send Message
                                         </button>
                                     </div>
-                                    <p id="form-status" class="text-center text-green-600 dark:text-green-400 mt-4"></p>
+                                    <p id="form-status" class="text-center text-green-600 dark:text-green-400 mt-2 text-lg"></p>
                                 </form>
                             </div>
                         </div>
@@ -92,23 +94,18 @@
             </div>
         </main>
 
-        <!-- Footer: Populated by JavaScript -->
         <footer id="footer-container" class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
         </footer>
     </div>
 
-    <!-- Main Application JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- STATE MANAGEMENT ---
             let currentTheme = localStorage.getItem('theme') || 'light';
             let isMenuOpen = false;
 
-            // --- DOM ELEMENTS ---
             const headerContainer = document.getElementById('header-container');
             const footerContainer = document.getElementById('footer-container');
 
-            // --- DATA ---
             const navItems = [
                 { id: 'home', label: 'Home', url: './index.html' }, 
                 { id: 'about', label: 'About', url: './about.html' },
@@ -118,7 +115,6 @@
                 { id: 'contact', label: 'Contact', url: './contact.html' },
             ];
 
-            // --- CORE FUNCTIONS ---
             const applyTheme = () => {
                 const html = document.documentElement;
                 if (currentTheme === 'dark') {
@@ -153,9 +149,8 @@
                 }, 1500);
             };
 
-            // --- RENDER FUNCTIONS ---
             const renderHeader = () => {
-                const currentPageId = 'contact'; // Hardcoded for contact.html
+                const currentPageId = 'contact';
                 const navLinksHTML = navItems.map(item => `
                     <a href="${item.url}" class="text-base font-medium transition-colors duration-200 ${currentPageId === item.id ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}">
                         ${item.label}
@@ -169,32 +164,32 @@
                 `).join('');
 
                 const themeIcon = currentTheme === 'light' 
-                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>` 
-                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>` 
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
                 
                 const menuIcon = isMenuOpen
-                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
-                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
 
                 headerContainer.innerHTML = `
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex justify-between items-center h-20">
                             <a href="./index.html" class="flex-shrink-0 cursor-pointer">
-                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
-                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                <h1 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
+                                    Mawjah
                                 </h1>
                             </a>
                             <nav class="hidden md:flex items-center space-x-8">
                                 ${navLinksHTML}
                                 <button id="theme-toggle-desktop" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${themeIcon}</button>
-                                <a href="./profile.html" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                <a href="./signin.html" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 transition-colors">
+                                    Sign In
                                 </a>
                             </nav>
                             <div class="md:hidden flex items-center">
                                 <button id="theme-toggle-mobile" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">${themeIcon}</button>
-                                <a href="./profile.html" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                <a href="./signin.html" class="text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
+                                    Sign In
                                 </a>
                                 <button id="menu-toggle" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${menuIcon}</button>
                             </div>
@@ -218,8 +213,8 @@
                     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                             <div class="col-span-1 md:col-span-2 lg:col-span-1">
-                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
-                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                <h1 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
+                                    Mawjah
                                 </h1>
                                 <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm">
                                     Revolutionizing fisheries management with AI and satellite technology for a sustainable future.
@@ -245,23 +240,20 @@
                         </div>
                         <div class="mt-8 border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
                             <p class="text-base text-slate-500 dark:text-slate-400 md:order-1">
-                                &copy; ${new Date().getFullYear()} AquaScope. All rights reserved.
+                                &copy; ${new Date().getFullYear()} Mawjah. All rights reserved.
                             </p>
                             <div class="flex space-x-6 md:order-2 mt-4 md:mt-0">
-                                <!-- Social Icons -->
-                            </div>
+                                </div>
                         </div>
                     </div>
                 `;
             };
 
-            // --- INITIALIZATION ---
             const init = () => {
                 applyTheme();
                 renderHeader();
                 renderFooter();
                 
-                // Add contact form listener
                 const form = document.getElementById('contact-form');
                 if (form) {
                     form.addEventListener('submit', handleContactSubmit);

@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About AquaScope - AI for Global Fisheries</title>
+    <title>About Mawjah - AI for Global Fisheries</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind CSS Config -->
     <script>
-      // This configuration script MUST come AFTER the main Tailwind script is loaded.
       tailwind.config = {
         darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
-              // Sets 'Inter' as the default font family for the site.
               sans: ['Inter', 'sans-serif'],
             },
           }
@@ -24,128 +20,134 @@
       }
     </script>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Custom Styles -->
     <style>
-        /* Dark mode root variables */
         html.dark { color-scheme: dark; }
 
-        /* Page transition animation */
         @keyframes fade-in { 
             0% { opacity: 0; transform: translateY(10px); } 
             100% { opacity: 1; transform: translateY(0); } 
         }
         .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+
+        html.light body {
+            background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+        }
+
+        html.dark body {
+            background: linear-gradient(135deg, #001f3f 0%, #004d7a 100%);
+        }
+
+        body {
+            margin: 0;
+        }
+
+        @keyframes icon-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .icon-wrapper:hover svg {
+            animation: icon-bounce 0.6s ease-in-out;
+        }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 font-sans">
+<body class="font-sans">
 
     <div id="app-container" class="min-h-screen flex flex-col">
-        <!-- Header: Populated by JavaScript -->
         <header id="header-container" class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700/50 sticky top-0 z-50">
         </header>
 
-        <!-- Main Content -->
         <main id="main-content" class="flex-grow">
             <div class="animate-fade-in">
-                <div class="bg-gradient-to-br from-cyan-600 to-teal-800 dark:from-slate-900 dark:to-slate-800 text-white">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+                <div class="bg-white dark:bg-slate-900">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                             <div class="text-center md:text-left">
-                                <span class="inline-block bg-white/10 text-white text-xs font-semibold px-3 py-1 rounded-full">About Us</span>
-                                <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                                <span class="inline-block bg-cyan-100 dark:bg-slate-800 text-cyan-800 dark:text-cyan-300 text-sm font-semibold px-4 py-1 rounded-full">About Us</span>
+                                <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-slate-900 dark:text-white sm:text-5xl md:text-6xl">
                                     Revolutionizing Fisheries Through Technology
                                 </h1>
-                                <p class="mt-6 text-lg text-cyan-100 dark:text-slate-300">
-                                    At AquaScope, we harness the power of technology to transform marine resource management. By combining satellite data and AI, our innovative platform delivers real-time, accurate insights for fisheries worldwide. Say goodbye to outdated, labor-intensive methods—empower your operations with AquaScope's data-driven solutions.
+                                <p class="mt-6 text-lg text-slate-600 dark:text-slate-300">
+                                    At Mawjah, we harness the power of technology to transform marine resource management. By combining satellite data and AI, our innovative platform delivers real-time, accurate insights for fisheries worldwide. Say goodbye to outdated, labor-intensive methods—empower your operations with Mawjah's data-driven solutions.
                                 </p>
                             </div>
-                            <div class="relative w-full aspect-square max-w-md mx-auto">
+                            <div class="relative w-full aspect-square max-w-md mx-auto transform hover:scale-105 transition-transform duration-300">
                                 <img src="./media/Google_AI_Studio_2025-08-21T09_56_17.959Z.png" alt="Fisheries Monitoring" class="w-full h-full object-cover rounded-2xl shadow-2xl" onerror="this.onerror=null;this.src='https://placehold.co/600x600/cccccc/ffffff?text=Image+Error';">
                             </div>
                         </div>
                     </div>
                 </div>
     
-                <div class="relative py-16 sm:py-24">
+                <div class="relative py-20 sm:py-28">
                     <img src="./media/Google_AI_Studio_2025-08-21T09_58_02.764Z.png" alt="Deep Ocean" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
-                    <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                        <h3 class="text-2xl font-bold">Our Mission</h3>
-                        <p class="mt-4 text-xl text-slate-300">
+                    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                        <h2 class="text-3xl font-bold sm:text-4xl">Our Mission</h2>
+                        <p class="mt-4 text-xl sm:text-2xl text-slate-300">
                             To revolutionize fisheries management and marine resource monitoring worldwide through the application of advanced remote sensing and artificial intelligence.
                         </p>
                     </div>
                 </div>
     
-                <div class="relative py-16 sm:py-24">
+                <div class="relative py-20 sm:py-28">
                      <img src="./media/Google_AI_Studio_2025-08-21T09_58_37.425Z.png" alt="Clear Skies" class="absolute inset-0 w-full h-full object-cover">
                      <div class="absolute inset-0 bg-cyan-800/60 backdrop-blur-sm"></div>
-                     <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                         <h3 class="text-2xl font-bold">Our Vision</h3>
-                         <p class="mt-4 text-xl text-cyan-100">
+                     <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                         <h2 class="text-3xl font-bold sm:text-4xl">Our Vision</h2>
+                         <p class="mt-4 text-xl sm:text-2xl text-cyan-100">
                              To be the cornerstone of a thriving and sustainable Blue Economy, ensuring food security and environmental stewardship for generations to come.
                          </p>
                      </div>
                 </div>
                 
-                <div class="relative bg-slate-900 py-16 sm:py-24">
-                    <img src="https://placehold.co/1920x800/020617/FFFFFF?text=Abstract+Data+Pattern" alt="Abstract data visualization" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20" onerror="this.onerror=null;this.src='https://placehold.co/1920x800/020617/FFFFFF?text=Image+Error';">
+                <div class="relative py-20 sm:py-28">
+                    <img src="./media/Google_AI_Studio_2025-08-21T09_58_02.764Z.png" alt="Abstract data visualization" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20" onerror="this.onerror=null;this.src='https://placehold.co/1920x800/020617/FFFFFF?text=Image+Error';">
                     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center">
-                             <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
+                             <h2 class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-5xl">
                                  Our Impact by the Numbers
                              </h2>
-                             <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-300">
+                             <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-600 dark:text-slate-300">
                                  Our technology is designed to deliver tangible, measurable results for national economies and marine environments.
                              </p>
                         </div>
                         <div id="about-impact-grid" class="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 text-center">
-                            <!-- Impact items will be injected by JS -->
-                        </div>
+                            </div>
                     </div>
                 </div>
     
-                <div class="bg-slate-50 dark:bg-slate-900 py-16 sm:py-24">
+                <div class="bg-white dark:bg-slate-900 py-20 sm:py-28">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center">
-                            <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                            <h2 class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-5xl">
                                 Our Core Values
                             </h2>
-                             <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300">
+                             <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-600 dark:text-slate-300">
                                  The principles that guide our work and our partnerships.
                              </p>
                         </div>
-                        <dl id="core-values-list" class="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 text-center">
-                            <!-- Values will be injected by JS -->
-                        </dl>
+                        <div id="core-values-list" class="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+                            </div>
                     </div>
                 </div>
             </div>
         </main>
 
-        <!-- Footer: Populated by JavaScript -->
         <footer id="footer-container" class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
         </footer>
     </div>
 
-    <!-- Main Application JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- STATE MANAGEMENT ---
             let currentTheme = localStorage.getItem('theme') || 'light';
             let isMenuOpen = false;
 
-            // --- DOM ELEMENTS ---
             const headerContainer = document.getElementById('header-container');
             const footerContainer = document.getElementById('footer-container');
-            const mainContent = document.getElementById('main-content');
 
-            // --- DATA ---
             const navItems = [
                 { id: 'home', label: 'Home', url: './index.html' }, 
                 { id: 'about', label: 'About', url: './about.html' },
@@ -154,8 +156,6 @@
                 { id: 'pricing', label: 'Pricing', url: './pricing.html' },
                 { id: 'contact', label: 'Contact', url: './contact.html' },
             ];
-
-            // --- CORE FUNCTIONS ---
 
             const applyTheme = () => {
                 const html = document.documentElement;
@@ -180,7 +180,6 @@
                 renderHeader();
             };
 
-            // --- DYNAMIC CONTENT POPULATION ---
             const populateAboutPage = () => {
                 const impacts = [
                     { value: '+25%', label: 'Increase in Sustainable Fish Yields' },
@@ -189,34 +188,36 @@
                     { value: '-60%', label: 'Decrease in Illegal Fishing Incidents' },
                 ];
                 const values = [
-                    { name: 'Innovation', description: 'We are driven by cutting-edge technology and a relentless pursuit of better solutions.' },
-                    { name: 'Sustainability', description: 'We are committed to the long-term health of marine ecosystems and the communities that depend on them.' },
-                    { name: 'Collaboration', description: 'We build strong partnerships with government, research, and industry to achieve shared goals.' },
-                    { name: 'Integrity', description: 'We operate with transparency, scientific rigor, and a commitment to delivering accurate, reliable data.' },
+                    { name: 'Innovation', description: 'We are driven by cutting-edge technology and a relentless pursuit of better solutions.', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-cyan-600 dark:text-cyan-400"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.311a2.25 2.25 0 01-2.25 2.25h-1.5a2.25 2.25 0 01-2.25-2.25m3.75-2.311a7.5 7.5 0 00-6-6.498M15 5.25a7.5 7.5 0 01-6 6.498m0 0a7.5 7.5 0 01-6-6.498M15 5.25c.183-.153.371-.3.566-.437A9 9 0 0112 3c-1.757 0-3.4-.586-4.684-1.567m.168 1.503a8.98 8.98 0 01-2.226 2.923" /></svg>` },
+                    { name: 'Sustainability', description: 'We are committed to the long-term health of marine ecosystems and the communities that depend on them.', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-cyan-600 dark:text-cyan-400"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A11.953 11.953 0 0112 16.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253M12 21a9.004 9.004 0 008.716-6.747" /></svg>` },
+                    { name: 'Collaboration', description: 'We build strong partnerships with government, research, and industry to achieve shared goals.', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-cyan-600 dark:text-cyan-400"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.962a3.75 3.75 0 015.25 0m-5.25 0a3.75 3.75 0 00-5.25 0M3 13.5a9 9 0 0118 0v-2.252a9.094 9.094 0 00-3.741-.479m-10.5 0a9.094 9.094 0 013.741-.479m7.5 0a3.75 3.75 0 01-7.5 0" /></svg>` },
+                    { name: 'Integrity', description: 'We operate with transparency, scientific rigor, and a commitment to delivering accurate, reliable data.', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-cyan-600 dark:text-cyan-400"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg>` },
                 ];
                 const impactContainer = document.getElementById('about-impact-grid');
                 const valuesContainer = document.getElementById('core-values-list');
                 
                 if (impactContainer) {
                     impactContainer.innerHTML = impacts.map(impact => `
-                        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
-                            <p class="text-4xl font-extrabold text-white">${impact.value}</p>
-                            <p class="mt-2 text-base font-medium text-slate-300">${impact.label}</p>
+                        <div class="bg-cyan-50/50 dark:bg-slate-800/50 backdrop-blur-sm p-8 rounded-lg transform hover:-translate-y-2 transition-transform duration-300">
+                            <p class="text-5xl font-extrabold text-slate-900 dark:text-white">${impact.value}</p>
+                            <p class="mt-3 text-lg font-medium text-slate-600 dark:text-slate-300">${impact.label}</p>
                         </div>`).join('');
                 }
 
                 if (valuesContainer) {
                     valuesContainer.innerHTML = values.map(value => `
-                        <div>
-                            <dt class="text-lg leading-6 font-bold text-slate-900 dark:text-white">${value.name}</dt>
-                            <dd class="mt-2 text-base text-slate-600 dark:text-slate-300">${value.description}</dd>
+                        <div class="bg-cyan-50/50 dark:bg-slate-800/50 p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition-transform duration-300 text-center">
+                            <div class="icon-wrapper flex items-center justify-center h-20 w-20 rounded-full bg-white dark:bg-slate-900 mx-auto mb-8">
+                                ${value.icon}
+                            </div>
+                            <h3 class="text-2xl leading-6 font-bold text-slate-900 dark:text-white">${value.name}</h3>
+                            <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">${value.description}</p>
                         </div>`).join('');
                 }
             };
 
-            // --- RENDER FUNCTIONS ---
             const renderHeader = () => {
-                const currentPageId = 'about'; // Hardcoded for about.html
+                const currentPageId = 'about';
                 const navLinksHTML = navItems.map(item => `
                     <a href="${item.url}" class="text-base font-medium transition-colors duration-200 ${currentPageId === item.id ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}">
                         ${item.label}
@@ -230,32 +231,32 @@
                 `).join('');
 
                 const themeIcon = currentTheme === 'light' 
-                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>` 
-                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>` 
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
                 
                 const menuIcon = isMenuOpen
-                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
-                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
 
                 headerContainer.innerHTML = `
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex justify-between items-center h-20">
                             <a href="./index.html" class="flex-shrink-0 cursor-pointer">
-                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
-                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                <h1 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
+                                    Mawjah
                                 </h1>
                             </a>
                             <nav class="hidden md:flex items-center space-x-8">
                                 ${navLinksHTML}
                                 <button id="theme-toggle-desktop" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${themeIcon}</button>
-                                <a href="./profile.html" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                <a href="./signin.html" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 transition-colors">
+                                    Sign In
                                 </a>
                             </nav>
                             <div class="md:hidden flex items-center">
                                 <button id="theme-toggle-mobile" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">${themeIcon}</button>
-                                <a href="./profile.html" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>
+                                <a href="./signin.html" class="text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
+                                    Sign In
                                 </a>
                                 <button id="menu-toggle" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${menuIcon}</button>
                             </div>
@@ -279,8 +280,8 @@
                     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                             <div class="col-span-1 md:col-span-2 lg:col-span-1">
-                                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
-                                    <span class="text-cyan-600 dark:text-cyan-400">Aqua</span>Scope
+                                <h1 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
+                                    Mawjah
                                 </h1>
                                 <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm">
                                     Revolutionizing fisheries management with AI and satellite technology for a sustainable future.
@@ -306,22 +307,20 @@
                         </div>
                         <div class="mt-8 border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
                             <p class="text-base text-slate-500 dark:text-slate-400 md:order-1">
-                                &copy; ${new Date().getFullYear()} AquaScope. All rights reserved.
+                                &copy; ${new Date().getFullYear()} Mawjah. All rights reserved.
                             </p>
                             <div class="flex space-x-6 md:order-2 mt-4 md:mt-0">
-                                <!-- Social Icons -->
-                            </div>
+                                </div>
                         </div>
                     </div>
                 `;
             };
 
-            // --- INITIALIZATION ---
             const init = () => {
                 applyTheme();
                 renderHeader();
                 renderFooter();
-                populateAboutPage(); // Populate the dynamic sections
+                populateAboutPage();
             };
 
             init();
