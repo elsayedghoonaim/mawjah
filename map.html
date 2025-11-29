@@ -239,11 +239,10 @@
             let drawnItems = new L.FeatureGroup();
             let currentLayer = null;
 
-            // --- 1. UI & Navigation Logic (Restored) ---
+            // --- 1. UI & Navigation Logic ---
             const headerContainer = document.getElementById('header-container');
             const footerContainer = document.getElementById('footer-container');
 
-            // Full Navigation Items
             const navItems = [
                 { id: 'home', label: 'Home', url: './index.html' },
                 { id: 'about', label: 'About', url: './about.html' },
@@ -311,9 +310,19 @@
                             <nav class="hidden md:flex items-center space-x-8">
                                 ${navLinksHTML}
                                 <button id="theme-toggle-desktop" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${themeIcon}</button>
+                                
+                                <a href="./signin.html" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 transition-colors">
+                                    Sign In
+                                </a>
                             </nav>
+                            
                             <div class="md:hidden flex items-center">
                                 <button id="theme-toggle-mobile" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">${themeIcon}</button>
+                                
+                                <a href="./signin.html" class="text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
+                                    Sign In
+                                </a>
+                                
                                 <button id="menu-toggle" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${menuIcon}</button>
                             </div>
                         </div>
@@ -326,7 +335,6 @@
                     </div>` : ''}
                 `;
 
-                // Re-attach event listeners
                 document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggleTheme);
                 document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
                 document.getElementById('menu-toggle')?.addEventListener('click', toggleMenu);
@@ -362,7 +370,7 @@
                 `;
             };
 
-            // --- 2. Map & Logic (Same as before) ---
+            // --- 2. Map & Logic ---
             const initMap = () => {
                 const mapContainer = document.getElementById('map-container');
                 if (mapContainer && !mapInstance) {
@@ -461,7 +469,6 @@
                 renderHeader();
                 renderFooter();
                 initMap();
-                // Set default dates to Jan 2023 as requested
                 document.getElementById('end_date').value = '2023-01-31';
                 document.getElementById('start_date').value = '2023-01-01';
                 document.getElementById('pfz-form').addEventListener('submit', handleAnalysis);
