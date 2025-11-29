@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Map - Mawjah</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
 
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-          }
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } }
+            }
         }
-      }
     </script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        html.dark { color-scheme: dark; }
 
-        @keyframes fade-in { 
-            0% { opacity: 0; transform: translateY(10px); } 
-            100% { opacity: 1; transform: translateY(0); } 
+    <style>
+        html.dark {
+            color-scheme: dark;
         }
-        .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
-        
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out forwards;
+        }
+
         html.light body {
             background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
         }
@@ -51,238 +61,295 @@
             width: 36px !important;
             height: 36px !important;
         }
-        .dark .leaflet-control-layers, .dark .leaflet-control-zoom {
+
+        .dark .leaflet-control-layers,
+        .dark .leaflet-control-zoom,
+        .dark .leaflet-draw-toolbar a {
             background: #1e293b;
             color: #e2e8f0;
             border: 1px solid #334155;
         }
-        .dark .leaflet-control-layers-base label, .dark .leaflet-control-layers-overlays label {
+
+        .dark .leaflet-control-layers-base label,
+        .dark .leaflet-control-layers-overlays label {
             color: #e2e8f0;
         }
+
         .dark .leaflet-tile-pane {
             filter: brightness(0.8) contrast(1.2);
         }
+
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #0891b2;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
+
 <body class="font-sans">
 
     <div id="app-container" class="min-h-screen flex flex-col">
-        <header id="header-container" class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700/50 sticky top-0 z-50">
+        <header id="header-container"
+            class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700/50 sticky top-0 z-50">
         </header>
 
         <main id="main-content" class="flex-grow">
             <div class="animate-fade-in">
-                <div class="py-20 sm:py-28">
-                   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                       <div class="text-center">
-                           <h2 class="text-lg font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">Interactive Map</h2>
-                           <p class="mt-2 text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-5xl">
-                               Explore Global Coastlines
-                           </p>
-                           <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-600 dark:text-slate-300">
-                               This interactive map demonstrates our geographic monitoring capabilities. Use the layer control in the top right to switch between different base maps and overlays.
-                           </p>
-                       </div>
-   
-                       <div class="mt-16 lg:grid lg:grid-cols-3 lg:gap-8 items-start">
-                           <div class="lg:col-span-2 rounded-lg shadow-2xl overflow-hidden">
-                                <div id="map-container" class="h-[600px] w-full"></div>
-                           </div>
-                           <div class="mt-8 lg:mt-0 bg-white dark:bg-slate-800/50 p-8 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700">
-                               <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Dynamic Data Visualization</h3>
-                               <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">
-                                   The map serves as the foundation for our platform. Soon, this view will be populated with our proprietary AI-driven data, including:
-                               </p>
-                               <ul class="mt-5 space-y-3 text-lg text-slate-600 dark:text-slate-300 list-disc list-inside">
-                                   <li>Real-time fish finding forecasts.</li>
-                                   <li>Illegal fishing activity alerts.</li>
-                                   <li>Historical yield data visualizations.</li>
-                               </ul>
-                               <p class="mt-5 text-lg text-slate-600 dark:text-slate-300">
-                                   This powerful combination of geographic and analytical data provides our clients with unparalleled insights for decision-making.
-                               </p>
-                               <a href="./contact.html" class="mt-8 w-full flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 transition-transform transform hover:scale-105">
-                                   Request a Demo
-                               </a>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
+                <div class="py-10 sm:py-16">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-8">
+                            <h2 class="text-lg font-semibold text-cyan-600 dark:text-cyan-400 tracking-wider uppercase">
+                                Interactive Map</h2>
+                            <p
+                                class="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight sm:text-4xl">
+                                Red Sea PFZ Analysis
+                            </p>
+                        </div>
+
+                        <div class="lg:grid lg:grid-cols-3 lg:gap-8 items-start">
+                            <div
+                                class="lg:col-span-2 rounded-lg shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700 relative">
+                                <div id="map-container" class="h-[650px] w-full z-0"></div>
+
+                                <div
+                                    class="absolute bottom-6 right-6 bg-white/90 dark:bg-slate-900/90 p-3 rounded shadow backdrop-blur-sm z-[400] text-xs">
+                                    <h4 class="font-bold text-slate-700 dark:text-slate-200 mb-2">PFZ Score Potential
+                                    </h4>
+                                    <div class="h-4 w-56 rounded"
+                                        style="background: linear-gradient(to right, #000080, #00BFFF, #32CD32, #FFFF00, #FFA500, #FF0000);">
+                                    </div>
+                                    <div
+                                        class="flex justify-between mt-1 text-slate-600 dark:text-slate-400 font-medium text-[10px]">
+                                        <span>Low (<0)< /span>
+                                                <span>Moderate (~1500)</span>
+                                                <span>High (>2500)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="mt-8 lg:mt-0 bg-white dark:bg-slate-800/80 p-6 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 backdrop-blur-sm">
+
+                                <div class="border-b border-slate-200 dark:border-slate-700 pb-4 mb-4">
+                                    <h3
+                                        class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                        Analysis Controls
+                                    </h3>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                                        Use the <span class="font-bold text-cyan-600">rectangle tool</span> on the map
+                                        to select an area.
+                                    </p>
+                                </div>
+
+                                <form id="pfz-form" class="space-y-4">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="start_date"
+                                                class="block text-sm font-medium text-slate-700 dark:text-slate-300">Start
+                                                Date</label>
+                                            <input type="date" id="start_date" name="start_date" max="2023-01-31"
+                                                class="mt-1 block w-full rounded-md border-slate-300 dark:border-slate-600 shadow-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white sm:text-sm px-3 py-2">
+                                        </div>
+                                        <div>
+                                            <label for="end_date"
+                                                class="block text-sm font-medium text-slate-700 dark:text-slate-300">End
+                                                Date</label>
+                                            <input type="date" id="end_date" name="end_date" max="2023-01-31"
+                                                class="mt-1 block w-full rounded-md border-slate-300 dark:border-slate-600 shadow-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white sm:text-sm px-3 py-2">
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-md border border-slate-200 dark:border-slate-700">
+                                        <h4
+                                            class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">
+                                            Area of Interest (AOI)</h4>
+                                        <div class="grid grid-cols-2 gap-4 mb-2">
+                                            <div><label class="text-xs text-slate-500">Min Lon</label><input
+                                                    type="number" step="0.0001" id="min_lon"
+                                                    class="w-full rounded text-xs py-1.5"></div>
+                                            <div><label class="text-xs text-slate-500">Max Lon</label><input
+                                                    type="number" step="0.0001" id="max_lon"
+                                                    class="w-full rounded text-xs py-1.5"></div>
+                                        </div>
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div><label class="text-xs text-slate-500">Min Lat</label><input
+                                                    type="number" step="0.0001" id="min_lat"
+                                                    class="w-full rounded text-xs py-1.5"></div>
+                                            <div><label class="text-xs text-slate-500">Max Lat</label><input
+                                                    type="number" step="0.0001" id="max_lat"
+                                                    class="w-full rounded text-xs py-1.5"></div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" id="analyze-btn"
+                                        class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cyan-600 hover:bg-cyan-700 transition-colors">
+                                        <span id="btn-text">Generate PFZ Layer</span>
+                                        <div id="btn-loader" class="loader ml-2 hidden"></div>
+                                    </button>
+                                    <p id="status-msg" class="text-xs text-center text-slate-500 mt-2 h-4"></p>
+                                </form>
+
+                                <div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700">
+                                    <h4 class="text-sm font-medium text-slate-900 dark:text-white">Statistics</h4>
+                                    <div id="stats-container"
+                                        class="mt-2 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                                        <p class="italic text-xs">Run analysis to see area statistics.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
-        <footer id="footer-container" class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
-        </footer>
+        <footer id="footer-container"
+            class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800"></footer>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
 
     <script>
+        // --- CONFIGURATION ---
+        // REPLACE THIS URL WITH YOUR ACTUAL HUGGING FACE SPACE DIRECT URL
+        // Example: "https://elsayedghonaim-red-sea-pfz.hf.space"
+        const API_BASE_URL = "https://elsayedghonaim-mawjah.hf.space";
+
         document.addEventListener('DOMContentLoaded', () => {
             let currentTheme = localStorage.getItem('theme') || 'light';
             let isMenuOpen = false;
             let mapInstance = null;
+            let drawnItems = new L.FeatureGroup();
+            let currentLayer = null;
 
+            // ... (Shared UI Logic: Header, Footer, Theme - Abbreviated for brevity) ...
             const headerContainer = document.getElementById('header-container');
             const footerContainer = document.getElementById('footer-container');
-
             const navItems = [
-                { id: 'home', label: 'Home', url: './index.html' }, 
-                { id: 'about', label: 'About', url: './about.html' },
-                { id: 'services', label: 'Services', url: './services.html' }, 
-                { id: 'map', label: 'Map', url: './map.html'}, 
-                { id: 'pricing', label: 'Pricing', url: './pricing.html' },
-                { id: 'contact', label: 'Contact', url: './contact.html' },
+                { id: 'home', label: 'Home', url: './index.html' },
+                { id: 'map', label: 'Map', url: './map.html' },
             ];
 
             const applyTheme = () => {
                 const html = document.documentElement;
-                if (currentTheme === 'dark') {
-                    html.classList.add('dark');
-                    html.classList.remove('light');
-                } else {
-                    html.classList.add('light');
-                    html.classList.remove('dark');
-                }
-                localStorage.setItem('theme', currentTheme);
+                currentTheme === 'dark' ? html.classList.add('dark') : html.classList.remove('dark');
             };
-
-            const toggleTheme = () => {
-                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-                applyTheme();
-                renderHeader();
+            const renderHeader = () => {
+                headerContainer.innerHTML = `<div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center"><h1 class="text-2xl font-bold text-cyan-600">Mawjah</h1><nav class="hidden md:flex space-x-8"><a href="./index.html" class="text-slate-600">Home</a><a href="./map.html" class="text-cyan-600">Map</a></nav></div>`;
             };
-            
-            const toggleMenu = () => {
-                isMenuOpen = !isMenuOpen;
-                renderHeader();
+            const renderFooter = () => {
+                footerContainer.innerHTML = `<div class="max-w-7xl mx-auto py-8 text-center text-slate-500">&copy; 2025 Mawjah</div>`;
             };
 
             const initMap = () => {
                 const mapContainer = document.getElementById('map-container');
                 if (mapContainer && !mapInstance) {
-                    mapInstance = L.map(mapContainer).setView([27.0, 30.0], 6);
+                    mapInstance = L.map(mapContainer).setView([24.0, 38.0], 5);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapInstance);
+                    mapInstance.addLayer(drawnItems);
 
-                    const baseLayers = {
-                        "Street Map": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        }),
-                        "Satellite View": L.esri.tiledMapLayer({
-                            url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
-                        })
-                    };
+                    const drawControl = new L.Control.Draw({
+                        draw: { polygon: false, marker: false, circle: false, polyline: false, circlemarker: false, rectangle: { shapeOptions: { color: '#0891b2' } } },
+                        edit: { featureGroup: drawnItems, remove: true }
+                    });
+                    mapInstance.addControl(drawControl);
 
-                    const overlayLayers = {
-                        "Labels & Boundaries": L.esri.tiledMapLayer({
-                            url: "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer"
-                        })
-                    };
-
-                    baseLayers["Street Map"].addTo(mapInstance);
-                    overlayLayers["Labels & Boundaries"].addTo(mapInstance);
-                    L.control.layers(baseLayers, overlayLayers).addTo(mapInstance);
+                    mapInstance.on(L.Draw.Event.CREATED, function (e) {
+                        drawnItems.clearLayers();
+                        drawnItems.addLayer(e.layer);
+                        const b = e.layer.getBounds();
+                        document.getElementById('min_lat').value = b.getSouth().toFixed(4);
+                        document.getElementById('max_lat').value = b.getNorth().toFixed(4);
+                        document.getElementById('min_lon').value = b.getWest().toFixed(4);
+                        document.getElementById('max_lon').value = b.getEast().toFixed(4);
+                    });
                 }
             };
 
-            const renderHeader = () => {
-                const currentPageId = 'map';
-                const navLinksHTML = navItems.map(item => `
-                    <a href="${item.url}" class="text-base font-medium transition-colors duration-200 ${currentPageId === item.id ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}">
-                        ${item.label}
-                    </a>
-                `).join('');
+            const handleAnalysis = async (e) => {
+                e.preventDefault();
+                const btnText = document.getElementById('btn-text');
+                const btnLoader = document.getElementById('btn-loader');
+                const statusMsg = document.getElementById('status-msg');
 
-                const mobileNavLinksHTML = navItems.map(item => `
-                    <a href="${item.url}" class="w-full text-left block px-3 py-2 rounded-md text-base font-medium ${currentPageId === item.id ? 'bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'}">
-                        ${item.label}
-                    </a>
-                `).join('');
+                btnText.textContent = 'Processing...';
+                btnLoader.classList.remove('hidden');
+                statusMsg.textContent = 'Connecting to Cloud Engine...';
 
-                const themeIcon = currentTheme === 'light' 
-                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>` 
-                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
-                
-                const menuIcon = isMenuOpen
-                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
-                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
+                // Ensure no trailing slash
+                const baseUrl = API_BASE_URL.replace(/\/$/, "");
 
-                headerContainer.innerHTML = `
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="flex justify-between items-center h-20">
-                            <a href="./index.html" class="flex-shrink-0 cursor-pointer">
-                                <h1 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
-                                    Mawjah
-                                </h1>
-                            </a>
-                            <nav class="hidden md:flex items-center space-x-8">
-                                ${navLinksHTML}
-                                <button id="theme-toggle-desktop" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${themeIcon}</button>
-                                <a href="./signin.html" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 transition-colors">
-                                    Sign In
-                                </a>
-                            </nav>
-                            <div class="md:hidden flex items-center">
-                                <button id="theme-toggle-mobile" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">${themeIcon}</button>
-                                <a href="./signin.html" class="text-base font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">
-                                    Sign In
-                                </a>
-                                <button id="menu-toggle" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${menuIcon}</button>
-                            </div>
-                        </div>
-                    </div>
-                    ${isMenuOpen ? `
-                    <div class="md:hidden bg-white/95 dark:bg-slate-900/95 border-t border-slate-200 dark:border-slate-800">
-                        <nav class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                            ${mobileNavLinksHTML}
-                        </nav>
-                    </div>` : ''}
-                `;
-                
-                document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggleTheme);
-                document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
-                document.getElementById('menu-toggle')?.addEventListener('click', toggleMenu);
-            };
+                const payload = {
+                    min_lon: parseFloat(document.getElementById('min_lon').value),
+                    min_lat: parseFloat(document.getElementById('min_lat').value),
+                    max_lon: parseFloat(document.getElementById('max_lon').value),
+                    max_lat: parseFloat(document.getElementById('max_lat').value),
+                    start_date: document.getElementById('start_date').value,
+                    end_date: document.getElementById('end_date').value
+                };
 
-            const renderFooter = () => {
-                footerContainer.innerHTML = `
-                    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                            <div class="col-span-1 md:col-span-2 lg:col-span-1">
-                                <h1 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
-                                    Mawjah
-                                </h1>
-                                <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm">
-                                    Revolutionizing fisheries management with AI and satellite technology for a sustainable future.
-                                </p>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white tracking-wider uppercase">Services</h3>
-                                <ul class="mt-4 space-y-2">
-                                    <li><a href="./services.html#strategic-management" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Strategic Management</a></li>
-                                    <li><a href="./services.html#commercial-intelligence" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Commercial Intelligence</a></li>
-                                    <li><a href="./services.html#maritime-surveillance" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Maritime Surveillance</a></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white tracking-wider uppercase">Quick Links</h3>
-                                <ul class="mt-4 space-y-2">
-                                    <li><a href="./about.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">About Us</a></li>
-                                    <li><a href="./services.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Services</a></li>
-                                    <li><a href="./map.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Map</a></li>
-                                    <li><a href="./contact.html" class="text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="mt-8 border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                            <p class="text-base text-slate-500 dark:text-slate-400 md:order-1">
-                                &copy; ${new Date().getFullYear()} Mawjah. All rights reserved.
-                            </p>
-                            <div class="flex space-x-6 md:order-2 mt-4 md:mt-0">
-                                </div>
-                        </div>
-                    </div>
-                `;
+                if (isNaN(payload.min_lon)) {
+                    statusMsg.textContent = 'Please draw a rectangle on the map first.';
+                    btnText.textContent = 'Generate PFZ Layer';
+                    btnLoader.classList.add('hidden');
+                    return;
+                }
+
+                try {
+                    // 1. Fetch Map Layer
+                    const mapResponse = await fetch(`${baseUrl}/get_map_layer`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!mapResponse.ok) throw new Error('API Error');
+                    const mapData = await mapResponse.json();
+
+                    if (currentLayer) mapInstance.removeLayer(currentLayer);
+                    currentLayer = L.tileLayer(mapData.url, { opacity: 0.85, zIndex: 100 }).addTo(mapInstance);
+                    statusMsg.textContent = 'Layer Loaded';
+
+                    // 2. Fetch Stats
+                    const statResponse = await fetch(`${baseUrl}/get_statistics`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const stats = await statResponse.json();
+
+                    document.getElementById('stats-container').innerHTML = `
+                        <div class="grid grid-cols-2 gap-2 mt-2">
+                            <div class="bg-slate-100 p-2 rounded"><span class="block text-xs text-slate-500">Avg SST</span><span class="font-bold">${stats.sst_mean.toFixed(2)} °C</span></div>
+                            <div class="bg-slate-100 p-2 rounded"><span class="block text-xs text-slate-500">Avg Chl-a</span><span class="font-bold">${stats.chl_mean.toFixed(2)}</span></div>
+                            <div class="bg-slate-100 p-2 rounded col-span-2"><span class="block text-xs text-slate-500">Max PFZ Score</span><span class="font-bold text-cyan-600">${stats.pfz_max.toFixed(0)}</span></div>
+                        </div>`;
+
+                } catch (error) {
+                    console.error(error);
+                    statusMsg.textContent = 'Failed to connect to Hugging Face API.';
+                } finally {
+                    btnText.textContent = 'Generate PFZ Layer';
+                    btnLoader.classList.add('hidden');
+                }
             };
 
             const init = () => {
@@ -290,11 +357,14 @@
                 renderHeader();
                 renderFooter();
                 initMap();
+                document.getElementById('end_date').value = '2023-01-31';
+                document.getElementById('start_date').value = '2023-01-01';
+                document.getElementById('pfz-form').addEventListener('submit', handleAnalysis);
             };
 
             init();
         });
     </script>
-
 </body>
+
 </html>
