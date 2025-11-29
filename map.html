@@ -229,8 +229,7 @@
 
     <script>
         // --- CONFIGURATION ---
-        // REPLACE THIS URL WITH YOUR ACTUAL HUGGING FACE SPACE DIRECT URL
-        // Example: "https://elsayedghonaim-red-sea-pfz.hf.space"
+        // REPLACE WITH YOUR ACTUAL HUGGING FACE URL
         const API_BASE_URL = "https://elsayedghonaim-mawjah.hf.space";
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -240,25 +239,130 @@
             let drawnItems = new L.FeatureGroup();
             let currentLayer = null;
 
-            // ... (Shared UI Logic: Header, Footer, Theme - Abbreviated for brevity) ...
+            // --- 1. UI & Navigation Logic (Restored) ---
             const headerContainer = document.getElementById('header-container');
             const footerContainer = document.getElementById('footer-container');
+
+            // Full Navigation Items
             const navItems = [
                 { id: 'home', label: 'Home', url: './index.html' },
+                { id: 'about', label: 'About', url: './about.html' },
+                { id: 'services', label: 'Services', url: './services.html' },
                 { id: 'map', label: 'Map', url: './map.html' },
+                { id: 'pricing', label: 'Pricing', url: './pricing.html' },
+                { id: 'contact', label: 'Contact', url: './contact.html' },
             ];
 
             const applyTheme = () => {
                 const html = document.documentElement;
-                currentTheme === 'dark' ? html.classList.add('dark') : html.classList.remove('dark');
-            };
-            const renderHeader = () => {
-                headerContainer.innerHTML = `<div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center"><h1 class="text-2xl font-bold text-cyan-600">Mawjah</h1><nav class="hidden md:flex space-x-8"><a href="./index.html" class="text-slate-600">Home</a><a href="./map.html" class="text-cyan-600">Map</a></nav></div>`;
-            };
-            const renderFooter = () => {
-                footerContainer.innerHTML = `<div class="max-w-7xl mx-auto py-8 text-center text-slate-500">&copy; 2025 Mawjah</div>`;
+                if (currentTheme === 'dark') {
+                    html.classList.add('dark');
+                    html.classList.remove('light');
+                } else {
+                    html.classList.add('light');
+                    html.classList.remove('dark');
+                }
+                localStorage.setItem('theme', currentTheme);
             };
 
+            const toggleTheme = () => {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                applyTheme();
+                renderHeader();
+            };
+
+            const toggleMenu = () => {
+                isMenuOpen = !isMenuOpen;
+                renderHeader();
+            };
+
+            const renderHeader = () => {
+                const currentPageId = 'map';
+
+                // Desktop Links
+                const navLinksHTML = navItems.map(item => `
+                    <a href="${item.url}" class="text-base font-medium transition-colors duration-200 ${currentPageId === item.id ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}">
+                        ${item.label}
+                    </a>
+                `).join('');
+
+                // Mobile Links
+                const mobileNavLinksHTML = navItems.map(item => `
+                    <a href="${item.url}" class="w-full text-left block px-3 py-2 rounded-md text-base font-medium ${currentPageId === item.id ? 'bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'}">
+                        ${item.label}
+                    </a>
+                `).join('');
+
+                // Icons
+                const themeIcon = currentTheme === 'light'
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>`;
+
+                const menuIcon = isMenuOpen
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>`;
+
+                headerContainer.innerHTML = `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex justify-between items-center h-20">
+                            <a href="./index.html" class="flex-shrink-0 cursor-pointer">
+                                <h1 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">Mawjah</h1>
+                            </a>
+                            <nav class="hidden md:flex items-center space-x-8">
+                                ${navLinksHTML}
+                                <button id="theme-toggle-desktop" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${themeIcon}</button>
+                            </nav>
+                            <div class="md:hidden flex items-center">
+                                <button id="theme-toggle-mobile" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mr-4">${themeIcon}</button>
+                                <button id="menu-toggle" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">${menuIcon}</button>
+                            </div>
+                        </div>
+                    </div>
+                    ${isMenuOpen ? `
+                    <div class="md:hidden bg-white/95 dark:bg-slate-900/95 border-t border-slate-200 dark:border-slate-800">
+                        <nav class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            ${mobileNavLinksHTML}
+                        </nav>
+                    </div>` : ''}
+                `;
+
+                // Re-attach event listeners
+                document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggleTheme);
+                document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+                document.getElementById('menu-toggle')?.addEventListener('click', toggleMenu);
+            };
+
+            const renderFooter = () => {
+                footerContainer.innerHTML = `
+                    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                            <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                                <h1 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">Mawjah</h1>
+                                <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm">Revolutionizing fisheries management with AI.</p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white uppercase">Services</h3>
+                                <ul class="mt-4 space-y-2">
+                                    <li><a href="./services.html" class="text-slate-600 dark:text-slate-300 hover:text-cyan-600">Strategic Management</a></li>
+                                    <li><a href="./services.html" class="text-slate-600 dark:text-slate-300 hover:text-cyan-600">Maritime Surveillance</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white uppercase">Quick Links</h3>
+                                <ul class="mt-4 space-y-2">
+                                    <li><a href="./about.html" class="text-slate-600 dark:text-slate-300 hover:text-cyan-600">About Us</a></li>
+                                    <li><a href="./contact.html" class="text-slate-600 dark:text-slate-300 hover:text-cyan-600">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-8 border-t border-slate-200 dark:border-slate-800 pt-8">
+                            <p class="text-base text-slate-500 text-center">&copy; ${new Date().getFullYear()} Mawjah. All rights reserved.</p>
+                        </div>
+                    </div>
+                `;
+            };
+
+            // --- 2. Map & Logic (Same as before) ---
             const initMap = () => {
                 const mapContainer = document.getElementById('map-container');
                 if (mapContainer && !mapInstance) {
@@ -338,9 +442,9 @@
 
                     document.getElementById('stats-container').innerHTML = `
                         <div class="grid grid-cols-2 gap-2 mt-2">
-                            <div class="bg-slate-100 p-2 rounded"><span class="block text-xs text-slate-500">Avg SST</span><span class="font-bold">${stats.sst_mean.toFixed(2)} °C</span></div>
-                            <div class="bg-slate-100 p-2 rounded"><span class="block text-xs text-slate-500">Avg Chl-a</span><span class="font-bold">${stats.chl_mean.toFixed(2)}</span></div>
-                            <div class="bg-slate-100 p-2 rounded col-span-2"><span class="block text-xs text-slate-500">Max PFZ Score</span><span class="font-bold text-cyan-600">${stats.pfz_max.toFixed(0)}</span></div>
+                            <div class="bg-slate-100 dark:bg-slate-700 p-2 rounded"><span class="block text-xs text-slate-500 dark:text-slate-400">Avg SST</span><span class="font-bold text-slate-900 dark:text-white">${stats.sst_mean.toFixed(2)} °C</span></div>
+                            <div class="bg-slate-100 dark:bg-slate-700 p-2 rounded"><span class="block text-xs text-slate-500 dark:text-slate-400">Avg Chl-a</span><span class="font-bold text-slate-900 dark:text-white">${stats.chl_mean.toFixed(2)}</span></div>
+                            <div class="bg-slate-100 dark:bg-slate-700 p-2 rounded col-span-2"><span class="block text-xs text-slate-500 dark:text-slate-400">Max PFZ Score</span><span class="font-bold text-cyan-600">${stats.pfz_max.toFixed(0)}</span></div>
                         </div>`;
 
                 } catch (error) {
@@ -357,6 +461,7 @@
                 renderHeader();
                 renderFooter();
                 initMap();
+                // Set default dates to Jan 2023 as requested
                 document.getElementById('end_date').value = '2023-01-31';
                 document.getElementById('start_date').value = '2023-01-01';
                 document.getElementById('pfz-form').addEventListener('submit', handleAnalysis);
